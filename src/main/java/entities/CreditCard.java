@@ -5,14 +5,14 @@ public class CreditCard {
     private String owner;
     private int endMonth;
     private int endYear;
-    private BankAccount account;
+    private int accountId;
 
-    public CreditCard(int cardNumber, String owner, int endMonth, int endYear, BankAccount account) {
+    public CreditCard(int cardNumber, String owner, int endMonth, int endYear, int accountId) {
         this.cardNumber = cardNumber;
         this.owner = owner;
         this.endMonth = endMonth;
         this.endYear = endYear;
-        this.account = account;
+        this.accountId = accountId;
     }
 
     public int getCardNumber() {
@@ -31,7 +31,7 @@ public class CreditCard {
         return endYear;
     }
 
-    public BankAccount getAccount() {
-        return account;
+    public int getAccountId() {
+        return accountId;
     }
 }

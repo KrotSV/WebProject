@@ -29,9 +29,9 @@ public class DatabaseEmulator {
         admins.add(new Admin("asdfg", "54321"));
 
 
-        CreditCard c1 = new CreditCard(4231, "Sergey Krotov", 3, 2018, acc1);
-        CreditCard c2 = new CreditCard(4231, "Sergey Krotov", 2, 2019, acc2);
-        CreditCard c3 = new CreditCard(1234, "Ivan Ivanov", 1, 2018, acc3);
+        CreditCard c1 = new CreditCard(4231, "Sergey Krotov", 3, 2018, 101);
+        CreditCard c2 = new CreditCard(4231, "Sergey Krotov", 2, 2019, 102);
+        CreditCard c3 = new CreditCard(1234, "Ivan Ivanov", 1, 2018, 201);
 
         ArrayList<CreditCard> skCards = new ArrayList<CreditCard>();
         ArrayList<CreditCard> iiCards = new ArrayList<CreditCard>();
