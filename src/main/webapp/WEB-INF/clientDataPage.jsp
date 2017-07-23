@@ -17,6 +17,7 @@
 <%--<p>${client.birthday}</p>--%>
 <table border="1"><c:forEach items="${accounts}" var="account">
     <tr>
+        <td>${account.cardNumber}</td>
         <td>${account.balance}</td>
         <td>${account.status}</td>
     </tr>

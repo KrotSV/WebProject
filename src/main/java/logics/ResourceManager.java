@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 public class ResourceManager {
-    public DAO getDAO(){
+    public static DAO getDAO(){
         return new DAOJava();
     }
 

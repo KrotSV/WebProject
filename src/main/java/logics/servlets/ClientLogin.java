@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @javax.servlet.annotation.WebServlet(name = "ClientLogin", urlPatterns = "/sendClientData")
 public class ClientLogin extends javax.servlet.http.HttpServlet {
-    DAO dao = new ResourceManager().getDAO();
+    DAO dao = ResourceManager.getDAO();
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
@@ -27,6 +27,9 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
         }
         request.getSession().setAttribute("accounts", accounts);
         request.getSession().setAttribute("client", client);request.getRequestDispatcher("WEB-INF/clientDataPage.jsp").forward(request, response);
+    }
+    else {
+        request.getRequestDispatcher("WEB-INF/noSuchUser.jsp").forward(request, response);;
     }
    }
 }

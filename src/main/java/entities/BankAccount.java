@@ -6,6 +6,7 @@ public class BankAccount implements Serializable{
     private int accountId;
     private double balance;
     private boolean status;
+    private int cardNumber;
 
     public BankAccount(){}
 
@@ -13,6 +14,17 @@ public class BankAccount implements Serializable{
         this.accountId = accountId;
         this.balance = balance;
         this.status = isBlocked;
+    }
+
+    public BankAccount(int accountId, double balance, boolean isBlocked, int cardNumber) {
+        this.accountId = accountId;
+        this.balance = balance;
+        this.status = isBlocked;
+        this.cardNumber = cardNumber;
+    }
+
+    public int getCardNumber() {
+        return cardNumber;
     }
 
     public int getAccountId() {
