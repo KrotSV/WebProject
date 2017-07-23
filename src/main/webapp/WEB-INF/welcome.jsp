@@ -1,4 +1,4 @@
-<%--
+<%@ page import="entities.Client" %><%--
   Created by IntelliJ IDEA.
   User: KrotSV
   Date: 23.07.2017
@@ -11,9 +11,6 @@
     <title>Welcome</title>
 </head>
 <body>
-    <form action="/send" method="get">
-        <p>text: <input type="text" name="firstName"/></p>
-        <input type="submit" value="Send"/>
-    </form>
+    <h1>${client.firstName}</h1>
 </body>
 </html>

@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class DatabaseEmulator {
-    private ArrayList<Admin> admins;
-    private ArrayList<Client> clients;
-    private ArrayList<CreditCard> cards;
-    private ArrayList<BankAccount> accounts;
+    private ArrayList<Admin> admins = new ArrayList<Admin>();
+    private ArrayList<Client> clients = new ArrayList<Client>();
+    private ArrayList<CreditCard> cards = new ArrayList<CreditCard>();
+    private ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
 
     public DatabaseEmulator() {
         BankAccount acc1 = new BankAccount(101, 5000, false);

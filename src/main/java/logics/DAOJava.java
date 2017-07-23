@@ -14,7 +14,7 @@ public class DAOJava extends DAO {
 
     DatabaseEmulator database = new DatabaseEmulator();
 
-    public boolean checkExistence(String firstName, String lastName, GregorianCalendar birthday) {
+    public boolean checkClientExistence(String firstName, String lastName) {
         ArrayList<Client> clients = database.getClients();
         Iterator<Client> iterator = clients.iterator();
         while (iterator.hasNext()){
@@ -27,12 +27,6 @@ public class DAOJava extends DAO {
                 iterator.remove();
             }
         }
-        while (iterator.hasNext()){
-            if(!iterator.next().getBirthday().equals(birthday)){
-                iterator.remove();
-            }
-        }
-
         return !clients.isEmpty();
     }
 
@@ -52,7 +46,7 @@ public class DAOJava extends DAO {
         return !admins.isEmpty();
     }
 
-    public Client getClientData(String firstName, String lastName, GregorianCalendar birthday) {
+    public Client getClientData(String firstName, String lastName) {
         Client client = null;
         for (Client cl:database.getClients()) {
             if(cl.getLastName().equals(lastName)){
@@ -97,6 +91,7 @@ public class DAOJava extends DAO {
                 break;
             }
         }
+        assert account != null;
         account.setBalance(account.getBalance() + sum);
         return true;
     }
@@ -116,6 +111,7 @@ public class DAOJava extends DAO {
                 break;
             }
         }
+        assert account != null;
         account.setBlocked(true);
         return true;
     }

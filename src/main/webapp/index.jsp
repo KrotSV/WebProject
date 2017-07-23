@@ -8,9 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>WelcomePage</title>
   </head>
   <body>
-  ola
+    <h1>Welcome to our system. Please introduce yourself</h1>
+    <form action="/sendClientData" method="get">
+      <p>Please, enter your first name: <input type="text" name="firstName"/></p>
+      <p>Please, enter your last name:   <input type="text" name="lastName"/></p>
+      <input type="submit" value="Login"/>
+    </form>
+  <form action="/goToAdminLoginPage" method="get">
+    <input type="submit" value="I'm Admin"/>
+  </form>
   </body>
 </html>
