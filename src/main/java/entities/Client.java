@@ -1,14 +1,17 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Client {
+public class Client implements Serializable{
     private int userId;
     private String firstName;
     private String lastName;
     private GregorianCalendar birthday;
     private ArrayList<CreditCard> cards;
+
+    public Client(){}
 
     public Client(int userId, String firstName, String lastName, GregorianCalendar birthday, ArrayList<CreditCard> cards) {
         this.userId = userId;

@@ -112,14 +112,14 @@ public class DAOJava extends DAO {
             }
         }
         assert account != null;
-        account.setBlocked(true);
+        account.setStatus(true);
         return true;
     }
 
     public boolean changeBlockStatus(int accountId) {
         for (BankAccount ba:database.getAccounts()) {
             if(ba.getAccountId() == accountId){
-                ba.setBlocked(!ba.isBlocked());
+                ba.setStatus(!ba.getStatus());
                 break;
             }
         }

@@ -1,11 +1,15 @@
 package entities;
 
-public class CreditCard {
+import java.io.Serializable;
+
+public class CreditCard implements Serializable{
     private int cardNumber;
     private String owner;
     private int endMonth;
     private int endYear;
     private int accountId;
+
+    public CreditCard(){}
 
     public CreditCard(int cardNumber, String owner, int endMonth, int endYear, int accountId) {
         this.cardNumber = cardNumber;

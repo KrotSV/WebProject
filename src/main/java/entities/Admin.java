@@ -1,8 +1,12 @@
 package entities;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable{
     private String login;
     private String password;
+
+    public Admin(){}
 
     public Admin(String login, String password) {
         this.login = login;

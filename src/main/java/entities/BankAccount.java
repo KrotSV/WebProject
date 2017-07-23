@@ -1,14 +1,18 @@
 package entities;
 
-public class BankAccount {
+import java.io.Serializable;
+
+public class BankAccount implements Serializable{
     private int accountId;
     private double balance;
-    private boolean isBlocked;
+    private boolean status;
+
+    public BankAccount(){}
 
     public BankAccount(int accountId, double balance, boolean isBlocked) {
         this.accountId = accountId;
         this.balance = balance;
-        this.isBlocked = isBlocked;
+        this.status = isBlocked;
     }
 
     public int getAccountId() {
@@ -19,15 +23,15 @@ public class BankAccount {
         return balance;
     }
 
-    public boolean isBlocked() {
-        return isBlocked;
+    public boolean getStatus() {
+        return status;
     }
 
     public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public void setBlocked(boolean blocked) {
-        isBlocked = blocked;
+    public void setStatus(boolean blocked) {
+        status = blocked;
     }
 }
