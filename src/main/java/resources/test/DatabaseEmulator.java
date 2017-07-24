@@ -42,7 +42,7 @@ public class DatabaseEmulator {
         cards.addAll(iiCards);
 
 
-        GregorianCalendar bd1 = new GregorianCalendar(1990, 7, 21);
+        GregorianCalendar bd1 = new GregorianCalendar(1990, 6, 21);
         GregorianCalendar bd2 = new GregorianCalendar(1950, 5, 5);
 
         Client cl1 = new Client(1, "Sergey", "Krotov", bd1, skCards);

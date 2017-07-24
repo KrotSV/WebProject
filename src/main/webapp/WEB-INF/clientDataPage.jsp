@@ -14,6 +14,7 @@
 <body>
 <h3>Personal account</h3>
 <p>${client.firstName} ${client.lastName}</p>
+<p>${birthday}</p>
 <%--<p>${client.birthday}</p>--%>
 <form>
 <table border="1">
