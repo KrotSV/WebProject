@@ -15,14 +15,25 @@
 <h3>Personal account</h3>
 <p>${client.firstName} ${client.lastName}</p>
 <%--<p>${client.birthday}</p>--%>
-<table border="1"><c:forEach items="${accounts}" var="account">
+<form>
+<table border="1">
     <tr>
+        <td></td>
+        <td><b>CardNumber</b></td>
+        <td><b>Balance</b></td>
+        <td><b>isBlocked</b></td>
+    </tr>
+    <c:forEach items="${accounts}" var="account">
+    <tr>
+        <td><input type="radio" name="cardChoose" value="${account.cardNumber}"></td>
         <td>${account.cardNumber}</td>
         <td>${account.balance}</td>
         <td>${account.status}</td>
     </tr>
-
 </c:forEach></table>
-
+    <p><button type="submit" formaction="/blockCard">Block</button>
+    <button type="submit" formaction="/addCard">Add</button>
+    <button type="submit" formaction="/payCard">Pay</button></p>
+</form>
 </body>
 </html>

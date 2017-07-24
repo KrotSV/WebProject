@@ -17,6 +17,5 @@
     <p>Enter last name:   <input type="text" name="lastName"/></p>
     <input type="submit" value="Submit"/>
 </form>
-</form>
 </body>
 </html>

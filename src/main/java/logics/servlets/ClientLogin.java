@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @javax.servlet.annotation.WebServlet(name = "ClientLogin", urlPatterns = "/sendClientData")
 public class ClientLogin extends javax.servlet.http.HttpServlet {
-    DAO dao = ResourceManager.getDAO();
+    private DAO dao = ResourceManager.getDAO();
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
