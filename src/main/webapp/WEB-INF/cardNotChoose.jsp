@@ -13,8 +13,8 @@
 <body>
 <form action="/sendClientData">
 <h3>Please, choose card</h3>
-    <input name="firstName" value="${firstName}">
-    <input name="lastName" value="${lastName}">
+    <input type="hidden" name="firstName" value="${firstName}">
+    <input type="hidden" name="lastName" value="${lastName}">
     <input type="submit" value="Back">
 </form>
 </body>

@@ -23,6 +23,6 @@ public class gotoAddForm extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/addMoneyToCard.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){}
-
+        request.getRequestDispatcher("WEB-INF/cardNotChoose.jsp").forward(request, response);
     }
 }

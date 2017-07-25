@@ -129,11 +129,14 @@ public class DAOJava extends DAO {
         int id = getAccount(cardNumber).getAccountId();
         LinkedList<Transaction> transactions = database.getHistory();
         Iterator<Transaction> iterator = transactions.iterator();
+        System.out.println("start size: " + transactions.size());
         while (iterator.hasNext()){
-            if(iterator.next().getAccountId() != id)
+            if(iterator.next().getAccountId() != id) {
                 iterator.remove();
+            }
         }
 
+        System.out.println("end size: " + transactions.size());
         return transactions;
     }
 

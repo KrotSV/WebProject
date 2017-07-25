@@ -1,10 +1,12 @@
 import entities.BankAccount;
 import entities.Client;
 import entities.CreditCard;
+import entities.Transaction;
 import logics.DAO;
 import logics.ResourceManager;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class test {
     public static void main(String[] args) {
@@ -16,13 +18,16 @@ public class test {
         System.out.println();
         System.out.println(cards.size());
         ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
+        LinkedList<Transaction> history = null;
         for (CreditCard c:cards) {
             System.out.println(c.getCardNumber());
             accounts.add(dao.getAccount(c.getCardNumber()));
-            System.out.println(dao.getAccount(c.getCardNumber()).getAccountId());
+            System.out.println();
+            history = dao.getHistory(c.getCardNumber());
         }
-        for (BankAccount ba:accounts) {
-//            System.out.println(ba.getBalance() + "; " + ba.getAccountId());
+        System.out.println("history: " + history.size());
+        for (Transaction tr:history) {
+            System.out.println(tr.getDate().getTime() + "; " + tr.getSum());
         }
     }
 }

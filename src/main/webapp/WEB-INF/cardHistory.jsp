@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: krotsv
@@ -11,6 +12,19 @@
     <title>History</title>
 </head>
 <body>
+<h3>Account operation history</h3>
+<p>Card number: ${account.cardNumber}; balance: ${account.balance}</p>
+    <table border="1">
+<tr>
+    <td><b>Date</b></td>
+    <td><b>Sum</b></td>
+</tr>
+<c:forEach items="${history}" var="transaction">
+    <tr>
+    <td>${transaction.date.time}</td>
+    <td>${transaction.sum}</td>
+    </tr>
+</c:forEach></table>
 
 </body>
 </html>

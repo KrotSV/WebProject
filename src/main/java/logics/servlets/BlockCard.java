@@ -18,8 +18,12 @@ public class BlockCard extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        dao.changeBlockStatus(Integer.parseInt(request.getParameter("cardChoose")), true);
-        request.getRequestDispatcher("WEB-INF/block.jsp").forward(request,response);
+        try {
+            dao.changeBlockStatus(Integer.parseInt(request.getParameter("cardChoose")), true);
+            request.getRequestDispatcher("WEB-INF/block.jsp").forward(request, response);
+        }
+        catch (NumberFormatException ex){
+            request.getRequestDispatcher("WEB-INF/cardNotChoose.jsp").forward(request, response);
+        }
     }
 }

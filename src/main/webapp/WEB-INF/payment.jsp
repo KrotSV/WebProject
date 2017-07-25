@@ -11,7 +11,7 @@
     <title>Payment</title>
 </head>
 <body>
-<form action="/payment">
+<form action="/paymentSend">
     <table border="1">
         <tr>
             <td><b>CardNumber</b></td>

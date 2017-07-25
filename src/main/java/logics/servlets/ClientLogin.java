@@ -26,7 +26,7 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
 
         request.getSession().setAttribute("birthday", ResourceManager.format(client.getBirthday()));
         request.getSession().setAttribute("firstName", client.getFirstName());
-        request.getSession().setAttribute("firstName", client.getLastName());
+        request.getSession().setAttribute("lastName", client.getLastName());
 
         for (CreditCard c:cards) {
             accounts.add(dao.getAccount(c.getCardNumber()));

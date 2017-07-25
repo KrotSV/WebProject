@@ -30,12 +30,12 @@ public class DatabaseEmulator {
         GregorianCalendar tr5 = new GregorianCalendar(2017, 6, 5, 13, 50);
         GregorianCalendar tr6 = new GregorianCalendar(2017, 6, 5, 14, 25);
 
-        Transaction transaction1 = new Transaction(4231, tr1, 5000);
-        Transaction transaction2 = new Transaction(4321, tr4, 30000);
-        Transaction transaction3 = new Transaction(4321, tr5, -20000);
-        Transaction transaction4 = new Transaction(4321, tr6, 10000);
-        Transaction transaction5 = new Transaction(4123, tr2, 25000);
-        Transaction transaction6 = new Transaction(1234, tr3, 1000);
+        Transaction transaction1 = new Transaction(101, tr1, 5000);
+        Transaction transaction2 = new Transaction(102, tr4, 30000);
+        Transaction transaction3 = new Transaction(102, tr5, -20000);
+        Transaction transaction4 = new Transaction(102, tr6, 10000);
+        Transaction transaction5 = new Transaction(103, tr2, 25000);
+        Transaction transaction6 = new Transaction(104, tr3, 1000);
 
         ArrayList<Transaction> hist1 = new ArrayList<Transaction>();
         ArrayList<Transaction> hist2 = new ArrayList<Transaction>();
