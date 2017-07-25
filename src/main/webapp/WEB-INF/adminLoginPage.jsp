@@ -13,8 +13,8 @@
 <body>
 <h1>Please enter your login and password</h1>
 <form action="/sendAdminData" method="get">
-    <p>login   <input type="text" name="login"/></p>
-    <p>Password<input type="text" name="pasword"/></p>
+    <p>login:    <input type="text" name="login"/></p>
+    <p>Password: <input type="text" name="password"/></p>
     <input type="submit" value="Login"/>
 </form>
 </body>

@@ -87,8 +87,8 @@ public class DatabaseEmulator {
         clients.add(cl1);
         clients.add(cl2);
 
-        CardRequest request1 = new CardRequest(Calendar.getInstance(), 1, TypeCard.CREDIT, false);
-        CardRequest request2 = new CardRequest(Calendar.getInstance(), 2, TypeCard.DEBET, true);
+        CardRequest request1 = new CardRequest(1, Calendar.getInstance(), 1, TypeCard.CREDIT, false);
+        CardRequest request2 = new CardRequest(2, Calendar.getInstance(), 2, TypeCard.DEBET, true);
         requests.add(request1);
         requests.add(request2);
 

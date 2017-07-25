@@ -11,10 +11,12 @@
     <title>noSuchUser</title>
 </head>
 <body>
-<h3>Sorry, but this user does not exist.</h3>
+<h3>This client does not exist.</h3>
 <h3>Verify that you put correct data</h3>
 <form>
-    <button formaction="/">Back</button>
+    <input type="hidden" name="login" value="${sessionScope.login}">
+    <input type="hidden" name="password" value="${sessionScope.password}">
+    <button formaction="/sendAdminData">Back</button>
 </form>
 </body>
 </html>

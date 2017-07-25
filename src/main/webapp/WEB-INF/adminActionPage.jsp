@@ -11,11 +11,12 @@
     <title>AdminActionPage</title>
 </head>
 <body>
-<h1>Please choose client</h1>
+<h3>Please choose client</h3>
 <form action="/sendClientDataByAdmin" method="get">
     <p>Enter first name: <input type="text" name="firstName"/></p>
-    <p>Enter last name:   <input type="text" name="lastName"/></p>
-    <input type="submit" value="Submit"/>
+    <p>Enter last  name: <input type="text" name="lastName"/></p>
+    <input type="submit" value="Show accounts"/>
+    <p>Check card issue requests: <button formaction="/checkRequests">Check</button></p>
 </form>
 </body>
 </html>

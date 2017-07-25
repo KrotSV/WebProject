@@ -18,10 +18,13 @@ public class AdminLogin extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DAO dao = ResourceManager.getDAO();
-        if(dao.checkAdmin(request.getParameter("login"), request.getParameter("password")))
+        if(dao.checkAdmin(request.getParameter("login"), request.getParameter("password"))) {
+            request.getSession().setAttribute("login", request.getParameter("login"));
+            request.getSession().setAttribute("password", request.getParameter("password"));
             request.getRequestDispatcher("WEB-INF/adminActionPage.jsp").forward(request, response);
+        }
         else
-            request.getRequestDispatcher("WEB-INF/noSuchUser.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/noSuchAdmin.jsp").forward(request, response);
 
     }
 }

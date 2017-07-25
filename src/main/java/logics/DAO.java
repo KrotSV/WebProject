@@ -18,4 +18,6 @@ public abstract class DAO {
     public abstract LinkedList<Transaction> getHistory(int cardNumber);
     public abstract boolean addTransaction(int cardNumber, double sum);
     public abstract boolean addCardRequest(int clientId, TypeCard typeCard);
+    public abstract boolean approveRequest(int requestId);
+    public abstract boolean rejectRequest(int requestId);
 }

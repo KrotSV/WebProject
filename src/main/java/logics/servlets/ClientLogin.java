@@ -36,7 +36,7 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
         request.getRequestDispatcher("WEB-INF/clientDataPage.jsp").forward(request, response);
     }
     else {
-        request.getRequestDispatcher("WEB-INF/noSuchUser.jsp").forward(request, response);;
+        request.getRequestDispatcher("WEB-INF/noSuchUser.jsp").forward(request, response);
     }
    }
 }

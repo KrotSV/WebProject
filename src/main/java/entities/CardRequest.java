@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CardRequest implements Serializable{
+    private int requestId;
     private Calendar date;
     private int clientId;
     private TypeCard typeCard;
@@ -12,7 +13,8 @@ public class CardRequest implements Serializable{
 
     public CardRequest(){};
 
-    public CardRequest(Calendar date, int clientId, TypeCard typeCard, boolean approval) {
+    public CardRequest(int requestId, Calendar date, int clientId, TypeCard typeCard, boolean approval) {
+        this.requestId = requestId;
         this.date = date;
         this.clientId = clientId;
         this.typeCard = typeCard;
@@ -49,5 +51,13 @@ public class CardRequest implements Serializable{
 
     public void setTypeCard(TypeCard typeCard) {
         this.typeCard = typeCard;
+    }
+
+    public int getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
     }
 }

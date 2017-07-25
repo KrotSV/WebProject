@@ -146,8 +146,28 @@ public class DAOJava extends DAO {
 
     public boolean addCardRequest(int clientId, TypeCard typeCard) {
         LinkedList<CardRequest> requests = database.getRequests();
-        requests.add(new CardRequest(Calendar.getInstance(), clientId, typeCard, false));
+        requests.add(new CardRequest(requests.size() + 1, Calendar.getInstance(), clientId, typeCard, false));
         database.setRequests(requests);
+        return true;
+    }
+
+    public boolean approveRequest(int requestId) {
+        for (CardRequest ca:database.getRequests()) {
+            if(ca.getRequestId() == requestId){
+                ca.setApproval(true);
+                break;
+            }
+        }
+        return true;
+    }
+
+    public boolean rejectRequest(int requestId) {
+        for (CardRequest ca:database.getRequests()) {
+            if(ca.getRequestId() == requestId){
+                ca.setApproval(false);
+                break;
+            }
+        }
         return true;
     }
 }
