@@ -10,15 +10,14 @@ public class BankAccount implements Serializable{
     private double balance;
     private boolean status;
     private int cardNumber;
-    private ArrayList<Transaction> history;
+
 
     public BankAccount(){}
 
-    public BankAccount(int accountId, double balance, boolean isBlocked, ArrayList<Transaction> history, int cardNumber) {
+    public BankAccount(int accountId, double balance, boolean isBlocked, int cardNumber) {
         this.accountId = accountId;
         this.balance = balance;
         this.status = isBlocked;
-        this.history = history;
         this.cardNumber = cardNumber;
     }
 
@@ -50,9 +49,6 @@ public class BankAccount implements Serializable{
         return status;
     }
 
-    public ArrayList<Transaction> getHistory() {
-        return history;
-    }
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
@@ -62,7 +58,4 @@ public class BankAccount implements Serializable{
         this.cardNumber = cardNumber;
     }
 
-    public void setHistory(ArrayList<Transaction> history) {
-        this.history = history;
-    }
 }

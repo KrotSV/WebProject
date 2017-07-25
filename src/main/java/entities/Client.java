@@ -9,24 +9,36 @@ public class Client implements Serializable{
     private String firstName;
     private String lastName;
     private GregorianCalendar birthday;
-    private ArrayList<CreditCard> cards;
+
 
     public Client(){}
 
-    public Client(int clientId, String firstName, String lastName, GregorianCalendar birthday, ArrayList<CreditCard> cards) {
+    public Client(int clientId, String firstName, String lastName, GregorianCalendar birthday) {
         this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
-        this.cards = cards;
+
     }
 
     public GregorianCalendar getBirthday() {
         return birthday;
     }
 
-    public ArrayList<CreditCard> getCards() {
-        return cards;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setBirthday(GregorianCalendar birthday) {
+        this.birthday = birthday;
     }
 
     public int getClientId() {

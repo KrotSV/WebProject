@@ -8,15 +8,18 @@ public class CreditCard implements Serializable{
     private String owner;
     private Calendar validity;
     private int accountId;
+    private int clientId;
     private TypeCard typeCard;
+
 
     private double limit;
 
     public CreditCard(){}
 
-    public CreditCard(int cardNumber, String owner, Calendar validity, TypeCard typeCard, double limit, int accountId) {
+    public CreditCard(int cardNumber, String owner, int clientId, Calendar validity, TypeCard typeCard, double limit, int accountId) {
         this.cardNumber = cardNumber;
         this.owner = owner;
+        this.clientId = clientId;
         this.validity = validity;
         this.typeCard = typeCard;
         this.limit = limit;
@@ -69,5 +72,13 @@ public class CreditCard implements Serializable{
 
     public void setTypeCard(TypeCard typeCard) {
         this.typeCard = typeCard;
+    }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 }

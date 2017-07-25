@@ -5,14 +5,15 @@ import entities.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 
 public class DatabaseEmulator {
     private ArrayList<Admin> admins = new ArrayList<Admin>();
     private ArrayList<Client> clients = new ArrayList<Client>();
     private ArrayList<CreditCard> cards = new ArrayList<CreditCard>();
     private ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
-    private ArrayList<CardRequest> requests = new ArrayList<CardRequest>();
-    private ArrayList<Transaction> history = new ArrayList<Transaction>();
+    private LinkedList<CardRequest> requests = new LinkedList<CardRequest>();
+    private LinkedList<Transaction> history = new LinkedList<Transaction>();
 
 
     public DatabaseEmulator() {
@@ -52,10 +53,10 @@ public class DatabaseEmulator {
         history.addAll(hist4);
 
 
-        BankAccount acc1 = new BankAccount(101, 5000, false, hist1, 4231);
-        BankAccount acc2 = new BankAccount(102, 20000, false, hist2, 4321);
-        BankAccount acc4 = new BankAccount(104, 1000, false, hist4, 1234);
-        BankAccount acc3 = new BankAccount(103, 25000, false, hist3, 4123);
+        BankAccount acc1 = new BankAccount(101, 5000, false, 4231);
+        BankAccount acc2 = new BankAccount(102, 20000, false, 4321);
+        BankAccount acc4 = new BankAccount(104, 1000, false, 1234);
+        BankAccount acc3 = new BankAccount(103, 25000, false, 4123);
         accounts.add(acc1);
         accounts.add(acc2);
         accounts.add(acc3);
@@ -66,10 +67,10 @@ public class DatabaseEmulator {
         admins.add(new Admin("asdfg", "54321"));
 
 
-        CreditCard c1 = new CreditCard(4231, "Sergey Krotov", val1, TypeCard.CREDIT, -50000, 101);
-        CreditCard c4 = new CreditCard(4321, "Sergey Krotov", val2, TypeCard.DEBET, 0, 101);
-        CreditCard c2 = new CreditCard(4123, "Sergey Krotov", val3, TypeCard.DEBET, 0, 101);
-        CreditCard c3 = new CreditCard(1234, "Ivan Ivanov", val4, TypeCard.CREDIT, -200000, 201);
+        CreditCard c1 = new CreditCard(4231, "Sergey Krotov", 1, val1, TypeCard.CREDIT, -50000, 101);
+        CreditCard c4 = new CreditCard(4321, "Sergey Krotov", 1,val2, TypeCard.DEBET, 0, 102);
+        CreditCard c2 = new CreditCard(4123, "Sergey Krotov", 1,val3, TypeCard.DEBET, 0, 103);
+        CreditCard c3 = new CreditCard(1234, "Ivan Ivanov", 2,val4, TypeCard.CREDIT, -200000, 204);
 
         ArrayList<CreditCard> skCards = new ArrayList<CreditCard>();
         ArrayList<CreditCard> iiCards = new ArrayList<CreditCard>();
@@ -81,8 +82,8 @@ public class DatabaseEmulator {
         cards.addAll(iiCards);
 
 
-        Client cl1 = new Client(1, "Sergey", "Krotov", bd1, skCards);
-        Client cl2 = new Client(2, "Ivan", "Ivanov", bd2, iiCards);
+        Client cl1 = new Client(1, "Sergey", "Krotov", bd1);
+        Client cl2 = new Client(2, "Ivan", "Ivanov", bd2);
         clients.add(cl1);
         clients.add(cl2);
 
@@ -113,12 +114,20 @@ public class DatabaseEmulator {
         return accounts;
     }
 
-    public ArrayList<CardRequest> getRequests() {
+    public LinkedList<CardRequest> getRequests() {
         return requests;
     }
 
-    public ArrayList<Transaction> getHistory() {
+    public LinkedList<Transaction> getHistory() {
         return history;
+    }
+
+    public void setRequests(LinkedList<CardRequest> requests) {
+        this.requests = requests;
+    }
+
+    public void setHistory(LinkedList<Transaction> history) {
+        this.history = history;
     }
 }
 

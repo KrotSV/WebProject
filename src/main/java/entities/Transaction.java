@@ -4,24 +4,24 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 public class Transaction implements Serializable{
-    private int CardNumber;
+    private int accountId;
     private Calendar date;
     private double sum;
 
     public Transaction(){}
 
-    public Transaction(int cardNumber, Calendar date, double sum) {
-        CardNumber = cardNumber;
+    public Transaction(int accountId, Calendar date, double sum) {
+        this.accountId = accountId;
         this.date = date;
         this.sum = sum;
     }
 
-    public int getCardNumber() {
-        return CardNumber;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setCardNumber(int cardNumber) {
-        CardNumber = cardNumber;
+    public void setAccountId(int accountId) {
+        accountId = accountId;
     }
 
     public Calendar getDate() {
