@@ -11,8 +11,8 @@
     <title>WelcomePage</title>
   </head>
   <body>
-    <h3>Welcome to our system. Please introduce yourself</h3>
-    <form action="/sendClientData" method="get">
+  <h3>Welcome to our system. Please introduce yourself</h3>
+  <form action="/sendClientData" method="get">
       <p>Please, enter your first name: <input type="text" name="firstName"/></p>
       <p>Please, enter your last name:   <input type="text" name="lastName"/></p>
       <input type="submit" value="Login"/>

@@ -6,6 +6,10 @@
         <element id="directory" name="classes">
           <element id="module-output" name="PaymentSystem" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="jstl:jstl:1.2" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6 (2)" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/PaymentSystem-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

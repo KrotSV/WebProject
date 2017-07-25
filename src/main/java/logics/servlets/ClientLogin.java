@@ -20,8 +20,12 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
     if(dao.checkClientExistence(request.getParameter("firstName"), request.getParameter("lastName"))){
         Client client = dao.getClientData(request.getParameter("firstName"), request.getParameter("lastName"));
+
         ArrayList<CreditCard> cards = client.getCards();
         ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
+
+        request.getSession().setAttribute("birthday", ResourceManager.format(client.getBirthday()));
+
         for (CreditCard c:cards) {
             accounts.add(dao.getAccount(c.getCardNumber()));
         }
