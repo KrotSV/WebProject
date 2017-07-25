@@ -89,22 +89,19 @@ public class DAOJava extends DAO {
     }
 
     public boolean balanceOperation(int cardNumber, double sum) {
-        BankAccount account = null;
-        int accId = 0;
-        for (CreditCard cc:database.getCards()) {
-            if(cc.getCardNumber() == cardNumber) {
-                accId = cc.getAccountId();
+        LinkedList<BankAccount> accounts = database.getAccounts();
+        BankAccount temp = null;
+        Iterator<BankAccount> iterator = accounts.iterator();
+        while (iterator.hasNext()){
+            temp = iterator.next();
+            if(temp.getCardNumber() == cardNumber){
+                iterator.remove();
                 break;
             }
         }
-        for (BankAccount ba:database.getAccounts()) {
-            if(ba.getAccountId() == accId){
-                account = ba;
-                break;
-            }
-        }
-        assert account != null;
-        account.setBalance(account.getBalance() + sum);
+        temp.setBalance(temp.getBalance() + sum);
+        accounts.add(temp);
+        database.setAccounts(accounts);
         return true;
     }
 

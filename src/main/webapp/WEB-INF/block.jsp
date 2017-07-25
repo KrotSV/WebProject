@@ -12,5 +12,11 @@
 </head>
 <body>
 <h4>Card is blocked</h4>
+<form action="/paymentSend">
+    <input type="hidden" name="cardChoose" value="${account.cardNumber}">
+        <input type="hidden" name="firstName" value="${sessionScope.firstName}">
+        <input type="hidden" name="lastName" value="${sessionScope.lastName}">
+        <button formaction="/sendClientData">Back</button>
+</form>
 </body>
 </html>

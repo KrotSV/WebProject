@@ -11,7 +11,7 @@ public class DatabaseEmulator {
     private ArrayList<Admin> admins = new ArrayList<Admin>();
     private ArrayList<Client> clients = new ArrayList<Client>();
     private ArrayList<CreditCard> cards = new ArrayList<CreditCard>();
-    private ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
+    private LinkedList<BankAccount> accounts = new LinkedList<BankAccount>();
     private LinkedList<CardRequest> requests = new LinkedList<CardRequest>();
     private LinkedList<Transaction> history = new LinkedList<Transaction>();
 
@@ -94,7 +94,7 @@ public class DatabaseEmulator {
 
     }
 
-    public void setAccounts(ArrayList<BankAccount> accounts) {
+    public void setAccounts(LinkedList<BankAccount> accounts) {
         this.accounts = accounts;
     }
 
@@ -110,7 +110,7 @@ public class DatabaseEmulator {
         return cards;
     }
 
-    public ArrayList<BankAccount> getAccounts() {
+    public LinkedList<BankAccount> getAccounts() {
         return accounts;
     }
 
@@ -129,5 +129,6 @@ public class DatabaseEmulator {
     public void setHistory(LinkedList<Transaction> history) {
         this.history = history;
     }
+
 }
 

@@ -11,11 +11,11 @@
     <title>cardNotChoose</title>
 </head>
 <body>
-<form action="/sendClientData">
+<form>
 <h3>Please, choose card</h3>
-    <input type="hidden" name="firstName" value="${firstName}">
-    <input type="hidden" name="lastName" value="${lastName}">
-    <input type="submit" value="Back">
+<input type="hidden" name="firstName" value="${firstName}">
+<input type="hidden" name="lastName" value="${lastName}">
+<button formaction="/sendClientData">Back</button>
 </form>
 </body>
 </html>

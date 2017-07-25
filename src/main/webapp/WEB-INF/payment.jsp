@@ -12,19 +12,15 @@
 </head>
 <body>
 <form action="/paymentSend">
-    <table border="1">
-        <tr>
-            <td><b>CardNumber</b></td>
-            <td><b>Balance</b></td>
-        </tr>
-        <tr>
-            <td>${account.cardNumber}</td>
-            <td>${account.balance}</td>
-        </tr>
-    </table>
-    <p>Please, enter sum of payment: <input type="text" name="sum"/></p>
+    <p>Card number: ${sessionScope.account.cardNumber}; balance: ${sessionScope.account.balance}</p>
+    <p>Please, enter sum of payment: <input type="text" name="sum" /></p>
     <p>Please, enter payment receiver Id: <input type="text" name="receiver"/></p>
-    <input type="submit" value="Pay"/>
+    <input type="hidden" name="cardChoose" value="${account.cardNumber}">
+    <p><input type="submit" value="Pay" pattern="^[0-9]+(\\.[0-9]+)?$"/>
+        <input type="hidden" name="firstName" value="${sessionScope.firstName}">
+    <input type="hidden" name="lastName" value="${sessionScope.lastName}">
+    <button formaction="/sendClientData">Back</button>
+    </p>
 </form>
 </body>
 </html>

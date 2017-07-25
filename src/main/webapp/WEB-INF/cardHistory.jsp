@@ -13,18 +13,24 @@
 </head>
 <body>
 <h3>Account operation history</h3>
-<p>Card number: ${account.cardNumber}; balance: ${account.balance}</p>
+<p>Card number: ${requestScope.account.cardNumber}; balance: ${requestScope.account.balance}</p>
     <table border="1">
 <tr>
     <td><b>Date</b></td>
     <td><b>Sum</b></td>
 </tr>
-<c:forEach items="${history}" var="transaction">
+<c:forEach items="${requestScope.history}" var="transaction">
     <tr>
     <td>${transaction.date.time}</td>
     <td>${transaction.sum}</td>
     </tr>
 </c:forEach></table>
-
+<form>
+    <p>
+    <input type="hidden" name="firstName" value="${sessionScope.firstName}">
+    <input type="hidden" name="lastName" value="${sessionScope.lastName}">
+        <button formaction="/sendClientData">Back</button>
+    </p>
+</form>
 </body>
 </html>
