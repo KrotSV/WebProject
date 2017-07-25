@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Client implements Serializable{
-    private int userId;
+    private int clientId;
     private String firstName;
     private String lastName;
     private GregorianCalendar birthday;
@@ -13,8 +13,8 @@ public class Client implements Serializable{
 
     public Client(){}
 
-    public Client(int userId, String firstName, String lastName, GregorianCalendar birthday, ArrayList<CreditCard> cards) {
-        this.userId = userId;
+    public Client(int clientId, String firstName, String lastName, GregorianCalendar birthday, ArrayList<CreditCard> cards) {
+        this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
@@ -29,8 +29,8 @@ public class Client implements Serializable{
         return cards;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getClientId() {
+        return clientId;
     }
 
     public String getFirstName() {

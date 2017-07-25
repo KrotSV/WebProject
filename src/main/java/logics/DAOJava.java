@@ -1,13 +1,9 @@
 package logics;
 
-import entities.Admin;
-import entities.BankAccount;
-import entities.Client;
-import entities.CreditCard;
+import entities.*;
 import resources.test.DatabaseEmulator;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class DAOJava extends DAO {
@@ -50,6 +46,17 @@ public class DAOJava extends DAO {
         Client client = null;
         for (Client cl:database.getClients()) {
             if(cl.getLastName().equals(lastName)){
+                client = cl;
+                break;
+            }
+        }
+        return client;
+    }
+
+    public Client getClientData(int clientId) {
+        Client client = null;
+        for (Client cl:database.getClients()) {
+            if(cl.getClientId() == clientId){
                 client = cl;
                 break;
             }
@@ -124,5 +131,13 @@ public class DAOJava extends DAO {
             }
         }
         return true;
+    }
+
+    public ArrayList<CardRequest> getRequests() {
+        return null;
+    }
+
+    public ArrayList<Transaction> getHistory() {
+        return null;
     }
 }

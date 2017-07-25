@@ -1,25 +1,24 @@
 package entities;
 
+import com.sun.xml.internal.stream.StaxErrorReporter;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class BankAccount implements Serializable{
     private int accountId;
     private double balance;
     private boolean status;
     private int cardNumber;
+    private ArrayList<Transaction> history;
 
     public BankAccount(){}
 
-    public BankAccount(int accountId, double balance, boolean isBlocked) {
+    public BankAccount(int accountId, double balance, boolean isBlocked, ArrayList<Transaction> history, int cardNumber) {
         this.accountId = accountId;
         this.balance = balance;
         this.status = isBlocked;
-    }
-
-    public BankAccount(int accountId, double balance, boolean isBlocked, int cardNumber) {
-        this.accountId = accountId;
-        this.balance = balance;
-        this.status = isBlocked;
+        this.history = history;
         this.cardNumber = cardNumber;
     }
 
@@ -45,5 +44,25 @@ public class BankAccount implements Serializable{
 
     public void setStatus(boolean blocked) {
         status = blocked;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public ArrayList<Transaction> getHistory() {
+        return history;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setCardNumber(int cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public void setHistory(ArrayList<Transaction> history) {
+        this.history = history;
     }
 }
