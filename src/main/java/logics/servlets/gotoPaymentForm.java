@@ -10,15 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Payment", urlPatterns = "/payCard")
-public class Payment extends HttpServlet {
+@WebServlet(name = "gotoPaymentForm", urlPatterns = "/payCard")
+public class gotoPaymentForm extends HttpServlet {
+
     private DAO dao = ResourceManager.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().setAttribute("account", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))));
-        request.getRequestDispatcher("WEB-INF/payment.jsp").forward(request, response);
+        try {
+            request.getSession().setAttribute("account", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))));
+            request.getRequestDispatcher("WEB-INF/payment.jsp").forward(request, response);
+        }
+        catch (NumberFormatException ex){
+            request.getRequestDispatcher("WEB-INF/cardNotChoose.jsp").forward(request, response);
+        }
     }
 }

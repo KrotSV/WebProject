@@ -53,10 +53,10 @@ public class DatabaseEmulator {
         history.addAll(hist4);
 
 
-        BankAccount acc1 = new BankAccount(101, 5000, false, 4231);
-        BankAccount acc2 = new BankAccount(102, 20000, false, 4321);
-        BankAccount acc4 = new BankAccount(104, 1000, false, 1234);
-        BankAccount acc3 = new BankAccount(103, 25000, false, 4123);
+        BankAccount acc1 = new BankAccount(101, 5000, false, 4231, TypeCard.CREDIT, -50000);
+        BankAccount acc2 = new BankAccount(102, 20000, false, 4321, TypeCard.DEBET, 0);
+        BankAccount acc4 = new BankAccount(104, 1000, false, 1234, TypeCard.CREDIT, -200000);
+        BankAccount acc3 = new BankAccount(103, 25000, false, 4123, TypeCard.DEBET, 0);
         accounts.add(acc1);
         accounts.add(acc2);
         accounts.add(acc3);

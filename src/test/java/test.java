@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class test {
     public static void main(String[] args) {
         DAO dao = new ResourceManager().getDAO();
-        Client client = dao.getClientData("Sergey", "Krotov");
+        Client client = dao.getClientData("Ivan", "Ivanov");
         System.out.println(client.getFirstName() + ", " + client.getLastName());
         System.out.printf(ResourceManager.format(client.getBirthday()));
-        ArrayList<CreditCard> cards = client.getCards();
+        ArrayList<CreditCard> cards = dao.getClientCards(client.getClientId());
         System.out.println();
         System.out.println(cards.size());
         ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();

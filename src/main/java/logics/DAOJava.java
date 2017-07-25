@@ -77,21 +77,14 @@ public class DAOJava extends DAO {
     }
 
     public BankAccount getAccount(int cardNumber) {
-        BankAccount account = null;
-        int accId = 0;
-        for (CreditCard cc:database.getCards()) {
-            if(cc.getCardNumber() == cardNumber) {
-                accId = cc.getAccountId();
-                break;
-            }
-        }
+        BankAccount bankAccount = null;
         for (BankAccount ba:database.getAccounts()) {
-            if(ba.getAccountId() == accId){
-                account = ba;
+            if(ba.getCardNumber() == cardNumber){
+                bankAccount = ba;
                 break;
             }
         }
-        return account;
+        return bankAccount;
 
     }
 
