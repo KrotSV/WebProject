@@ -41,6 +41,7 @@
     <button type="submit" formaction="/showHistory">History</button>
     <button type="submit" formaction="/blockCard">Block</button></p>
     <p><button type="submit" formaction="/requestNewCard">Request new card</button></p>
+    <p><button type="submit" formaction="/">Exit</button></p>
 </form>
 </body>
 </html>
