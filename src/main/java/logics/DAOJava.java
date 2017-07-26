@@ -88,7 +88,7 @@ public class DAOJava extends DAO {
 
     }
 
-    public boolean balanceOperation(int cardNumber, double sum) {
+    public void balanceOperation(int cardNumber, double sum) {
         LinkedList<BankAccount> accounts = database.getAccounts();
         BankAccount temp = null;
         Iterator<BankAccount> iterator = accounts.iterator();
@@ -102,19 +102,17 @@ public class DAOJava extends DAO {
         temp.setBalance(temp.getBalance() + sum);
         accounts.add(temp);
         database.setAccounts(accounts);
-        return true;
     }
 
 
 
-    public boolean changeBlockStatus(int accountId, boolean status) {
+    public void changeBlockStatus(int accountId, boolean status) {
         for (BankAccount ba:database.getAccounts()) {
             if(ba.getAccountId() == accountId){
                 ba.setStatus(status);
                 break;
             }
         }
-        return true;
     }
 
     public LinkedList<CardRequest> getRequests() {
@@ -137,37 +135,33 @@ public class DAOJava extends DAO {
         return transactions;
     }
 
-    public boolean addTransaction(int cardNumber, double sum) {
+    public void addTransaction(int cardNumber, double sum) {
         LinkedList<Transaction> history = database.getHistory();
-        history.add(new Transaction(getAccount(cardNumber).getAccountId(), Calendar.getInstance(), sum));
+        history.add(new Transaction(history.size() + 1, getAccount(cardNumber).getAccountId(), Calendar.getInstance(), sum));
         database.setHistory(history);
-        return true;
     }
 
-    public boolean addCardRequest(int clientId, TypeCard typeCard) {
+    public void addCardRequest(int clientId, TypeCard typeCard) {
         LinkedList<CardRequest> requests = database.getRequests();
         requests.add(new CardRequest(requests.size() + 1, Calendar.getInstance(), clientId, typeCard, false));
         database.setRequests(requests);
-        return true;
     }
 
-    public boolean approveRequest(int requestId) {
+    public void approveRequest(int requestId) {
         for (CardRequest ca:database.getRequests()) {
             if(ca.getRequestId() == requestId){
                 ca.setApproval(true);
                 break;
             }
         }
-        return true;
     }
 
-    public boolean rejectRequest(int requestId) {
+    public void rejectRequest(int requestId) {
         for (CardRequest ca:database.getRequests()) {
             if(ca.getRequestId() == requestId){
                 ca.setApproval(false);
                 break;
             }
         }
-        return true;
     }
 }

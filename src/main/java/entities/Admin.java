@@ -3,12 +3,14 @@ package entities;
 import java.io.Serializable;
 
 public class Admin implements Serializable{
+    private int adminId;
     private String login;
     private String password;
 
     public Admin(){}
 
-    public Admin(String login, String password) {
+    public Admin(int adminIs, String login, String password) {
+        this.adminId = adminIs;
         this.login = login;
         this.password = password;
     }
@@ -27,5 +29,13 @@ public class Admin implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
     }
 }

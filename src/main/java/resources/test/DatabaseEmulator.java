@@ -30,12 +30,12 @@ public class DatabaseEmulator {
         GregorianCalendar tr5 = new GregorianCalendar(2017, 6, 5, 13, 50);
         GregorianCalendar tr6 = new GregorianCalendar(2017, 6, 5, 14, 25);
 
-        Transaction transaction1 = new Transaction(101, tr1, 5000);
-        Transaction transaction2 = new Transaction(102, tr4, 30000);
-        Transaction transaction3 = new Transaction(102, tr5, -20000);
-        Transaction transaction4 = new Transaction(102, tr6, 10000);
-        Transaction transaction5 = new Transaction(103, tr2, 25000);
-        Transaction transaction6 = new Transaction(104, tr3, 1000);
+        Transaction transaction1 = new Transaction(0, 101, tr1, 5000);
+        Transaction transaction2 = new Transaction(1, 102, tr4, 30000);
+        Transaction transaction3 = new Transaction(2, 102, tr5, -20000);
+        Transaction transaction4 = new Transaction(3, 102, tr6, 10000);
+        Transaction transaction5 = new Transaction(4, 103, tr2, 25000);
+        Transaction transaction6 = new Transaction(5, 104, tr3, 1000);
 
         ArrayList<Transaction> hist1 = new ArrayList<Transaction>();
         ArrayList<Transaction> hist2 = new ArrayList<Transaction>();
@@ -63,8 +63,8 @@ public class DatabaseEmulator {
         accounts.add(acc4);
 
 
-        admins.add(new Admin("qwerty", "12345"));
-        admins.add(new Admin("asdfg", "54321"));
+        admins.add(new Admin(0, "qwerty", "12345"));
+        admins.add(new Admin(1, "asdfg", "54321"));
 
 
         CreditCard c1 = new CreditCard(4231, "Sergey Krotov", 1, val1, TypeCard.CREDIT, -50000, 101);
