@@ -18,6 +18,9 @@ public class DAOmysql extends DAO{
             ResultSet resultSet = ps.executeQuery();
 //            out = resultSet.getString("login");
             System.out.println("print result");
+            if (!resultSet.isBeforeFirst() ) {
+                System.out.println("No data");
+            }
             while (resultSet.next()) {
                 System.out.println("Номер в выборке #" + resultSet.getRow()
                         + "\t Номер в базе #" + resultSet.getInt("clientId")
@@ -37,12 +40,20 @@ public class DAOmysql extends DAO{
         Connection connection = DBconnect.getConnection();
         boolean check = false;
         try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE firstName = ? & clients.lastName = ?");
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE clients.firstName= ? & clients.lastName= ?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
 
             ResultSet result = ps.executeQuery();
-            check = !result.wasNull();
+            check = result.next();
+            if (!result.isBeforeFirst() ) {
+                System.out.println("No data");
+            }
+            while (result.next()) {
+                System.out.println("Номер в выборке #" + result.getRow()
+                        + "\t Номер в базе #" + result.getInt("clientId")
+                        + "\t" + result.getString("firstName"));
+            }
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
