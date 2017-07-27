@@ -2,16 +2,17 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Transaction implements Serializable{
     private int transactionId;
     private int accountId;
-    private Calendar date;
+    private Date date;
     private double sum;
 
     public Transaction(){}
 
-    public Transaction(int transactionId, int accountId, Calendar date, double sum) {
+    public Transaction(int transactionId, int accountId, Date date, double sum) {
         this.transactionId = transactionId;
         this.accountId = accountId;
         this.date = date;
@@ -26,11 +27,11 @@ public class Transaction implements Serializable{
         accountId = accountId;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

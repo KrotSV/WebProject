@@ -27,8 +27,8 @@ public class Test extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Connection connection = null;
-        Connection conn = null;
-        try {
+            Connection conn = null;
+            try {
 //            Driver driver = new FabricMySQLDriver();
 //            DriverManager.registerDriver(driver);
 //            System.out.println(Class.forName("com.mysql.jdbc.Driver"));

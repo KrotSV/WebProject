@@ -2,11 +2,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreditCard implements Serializable{
     private int cardNumber;
     private String owner;
-    private Calendar validity;
+    private Date validity;
     private int accountId;
     private int clientId;
     private TypeCard typeCard;
@@ -16,7 +17,7 @@ public class CreditCard implements Serializable{
 
     public CreditCard(){}
 
-    public CreditCard(int cardNumber, String owner, int clientId, Calendar validity, TypeCard typeCard, double limit, int accountId) {
+    public CreditCard(int cardNumber, String owner, int clientId, Date validity, TypeCard typeCard, double limit, int accountId) {
         this.cardNumber = cardNumber;
         this.owner = owner;
         this.clientId = clientId;
@@ -34,7 +35,7 @@ public class CreditCard implements Serializable{
         return owner;
     }
 
-    public Calendar getValidity() {
+    public Date getValidity() {
         return validity;
     }
 
@@ -58,7 +59,7 @@ public class CreditCard implements Serializable{
         this.owner = owner;
     }
 
-    public void setValidity(Calendar validity) {
+    public void setValidity(Date validity) {
         this.validity = validity;
     }
 

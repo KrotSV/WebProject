@@ -9,10 +9,10 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-dbcp:8.5.16" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-juli:8.5.16" />
-          <element id="library" level="project" name="mysql-connector-java-5.1.43-bin" />
+          <element id="library" level="project" name="commons-dbcp:commons-dbcp:1.4" />
           <element id="library" level="project" name="jstl:jstl:1.2" />
           <element id="library" level="project" name="Java EE 6-Java EE 6" />
-          <element id="library" level="project" name="commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="mysql-connector-java-5.0.8-bin" />
         </element>
       </element>
       <element id="directory" name="META-INF">

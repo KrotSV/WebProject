@@ -2,18 +2,19 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Client implements Serializable{
     private int clientId;
     private String firstName;
     private String lastName;
-    private GregorianCalendar birthday;
+    private Date birthday;
 
 
     public Client(){}
 
-    public Client(int clientId, String firstName, String lastName, GregorianCalendar birthday) {
+    public Client(int clientId, String firstName, String lastName, Date birthday) {
         this.clientId = clientId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,7 +22,7 @@ public class Client implements Serializable{
 
     }
 
-    public GregorianCalendar getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
@@ -37,7 +38,7 @@ public class Client implements Serializable{
         this.lastName = lastName;
     }
 
-    public void setBirthday(GregorianCalendar birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

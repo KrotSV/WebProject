@@ -24,7 +24,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/webapp/META-INF" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -32,9 +31,9 @@
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="jstl:jstl:1.2" level="project" />
     <orderEntry type="library" name="commons-dbcp:commons-dbcp:1.4" level="project" />
-    <orderEntry type="library" name="org.apache.tomcat:tomcat-dbcp:8.5.16" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-dbcp:8.5.16" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.16" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.43-bin" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.31" level="project" />
   </component>
 </module>

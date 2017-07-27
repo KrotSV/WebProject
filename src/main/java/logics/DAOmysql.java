@@ -34,32 +34,130 @@ public class DAOmysql extends DAO{
 
     @Override
     public boolean checkClientExistence(String firstName, String lastName) {
-        return false;
+        Connection connection = DBconnect.getConnection();
+        boolean check = false;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE firstName = ? & clients.lastName = ?");
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+
+            ResultSet result = ps.executeQuery();
+            check = !result.wasNull();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
     }
 
     @Override
     public boolean checkAdmin(String login, String password) {
-        return false;
+        Connection connection = DBconnect.getConnection();
+        boolean check = false;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM admins WHERE login = ? & admins.password = ?");
+            ps.setString(1, login);
+            ps.setString(2, password);
+
+            ResultSet result = ps.executeQuery();
+            check = !result.wasNull();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return check;
     }
 
     @Override
     public Client getClientData(String firstName, String lastName) {
-        return null;
+        Connection connection = DBconnect.getConnection();
+        Client client = new Client();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE firstName = ? & clients.lastName = ?");
+            ps.setString(1, firstName);
+            ps.setString(2, lastName);
+            ResultSet result = ps.executeQuery();
+            client.setFirstName(result.getString("firstName"));
+            client.setLastName(result.getString("lastName"));
+            client.setBirthday(result.getDate("birthday"));
+            client.setClientId(result.getInt("clientId"));
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return client;
+
     }
 
     @Override
     public ArrayList<CreditCard> getClientCards(int clientId) {
-        return null;
+        Connection connection = DBconnect.getConnection();
+        ArrayList<CreditCard> cards = new ArrayList<>();
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM creditcards WHERE clientId = ?");
+            ps.setInt(1, clientId);
+            ResultSet result = ps.executeQuery();
+            while (result.next()) {
+                CreditCard card = new CreditCard();
+                card.setAccountId(result.getInt("accountId"));
+                card.setCardNumber(result.getInt("cardNumber"));
+                card.setClientId(clientId);
+                card.setLimit(result.getDouble("limitSum"));
+                card.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
+                card.setOwner(result.getString("owner"));
+                card.setValidity(result.getDate("validity"));
+                cards.add(card);
+            }
+            connection.close();
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cards;
     }
 
-    @Override
+        @Override
     public BankAccount getAccount(int cardNumber) {
-        return null;
+            Connection connection = DBconnect.getConnection();
+            BankAccount account = new BankAccount();
+            try {
+                PreparedStatement ps = connection.prepareStatement("SELECT * FROM bankaccounts WHERE cardNumber = ?");
+                ps.setInt(1, cardNumber);
+                ResultSet result = ps.executeQuery();
+                account.setAccountId(result.getInt("accountId"));
+                account.setCardNumber(cardNumber);
+                account.setBalance(result.getDouble("balance"));
+                account.setLimit(result.getDouble("limitSum"));
+                account.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
+                account.setStatus(result.getBoolean("status"));
+                connection.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return account;
     }
 
     @Override
     public void balanceOperation(int cardNumber, double sum) {
-
+//        Connection connection = DBconnect.getConnection();
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("UPDATE bankaccounts SET balance = ? WHERE cardNumber = ?");
+//            ps.setDouble(1, cardNumber);
+//            ps.setInt(1, cardNumber);
+//            ResultSet result = ps.executeQuery();
+//            account.setAccountId(result.getInt("accountId"));
+//            account.setCardNumber(cardNumber);
+//            account.setBalance(result.getDouble("balance"));
+//            account.setLimit(result.getDouble("limitSum"));
+//            account.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
+//            account.setStatus(result.getBoolean("status"));
+//            connection.close();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
