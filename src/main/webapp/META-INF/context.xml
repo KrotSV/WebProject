@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<context>
-    <resource name="jdbc/DBPool"
-          auth="Container"
-          description="DB Connection"
-          username="root"
-          password="root"
-          type="javax.sql.DataSource"
-          maxActive="100"
-          maxIdle="30"
-          maxWait="10000"
-          driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://localhost:3306/psdatabase"/>
-</context>
+<GlobalNamingResources>
+    <Resource name="jdbc/PaymentSystem"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="100"
+              maxIdle="30"
+              maxWaitMillis="10000"
+              username="root"
+              password="root"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/psdatabase"/>
+</GlobalNamingResources>

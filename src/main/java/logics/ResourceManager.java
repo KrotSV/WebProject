@@ -5,7 +5,7 @@ import java.util.GregorianCalendar;
 
 public class ResourceManager {
     public static DAO getDAO(){
-        return new DAOJava();
+        return new DAOmysql();
     }
 
 

@@ -2,10 +2,12 @@ package logics;
 
 import entities.*;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public abstract class DAO {
+    public abstract String testDB(Connection connection);
     public abstract boolean checkClientExistence(String firstName, String lastName);
     public abstract boolean checkAdmin(String login, String password);
     public abstract Client getClientData(String firstName, String lastName);

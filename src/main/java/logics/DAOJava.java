@@ -3,6 +3,7 @@ package logics;
 import entities.*;
 import resources.test.DatabaseEmulator;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -11,6 +12,11 @@ import java.util.LinkedList;
 public class DAOJava extends DAO {
 
     private DatabaseEmulator database = new DatabaseEmulator();
+
+    @Override
+    public String testDB(Connection connection) {
+        return null;
+    }
 
     public boolean checkClientExistence(String firstName, String lastName) {
         ArrayList<Client> clients = database.getClients();

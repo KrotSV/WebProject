@@ -3,13 +3,33 @@ package logics;
 import entities.*;
 
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DAOmysql extends DAO{
 
-    Connection connection = DBPool.getConnection();
+
+    public String testDB(Connection connection){
+        String out = null;
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients");
+//            ps.setInt(1, 1);
+            ResultSet resultSet = ps.executeQuery();
+//            out = resultSet.getString("login");
+            System.out.println("print result");
+            while (resultSet.next()) {
+                System.out.println("Номер в выборке #" + resultSet.getRow()
+                        + "\t Номер в базе #" + resultSet.getInt("clientId")
+                        + "\t" + resultSet.getString("firstName"));
+            }
+//            Statement statement = connection.createStatement();
+//            statement.executeQuery()
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
 
 
     @Override
