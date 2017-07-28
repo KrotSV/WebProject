@@ -20,13 +20,11 @@ public class adjunctionOperation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             DAO dao = ResourceManager.getDAO();
-            BankAccount account = dao.getAccount(Integer.parseInt(request.getParameter("cardChoose")));
-            request.getSession().setAttribute("cardChoose", Integer.parseInt(request.getParameter("cardChoose")));
-            dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).setBalance(account.getBalance() + Double.parseDouble(request.getParameter("sum")));
-            dao.addTransaction((Integer) request.getSession().getAttribute("cardChoose"), Double.parseDouble(request.getParameter("sum")));
+            BankAccount account = (BankAccount)request.getSession().getAttribute("account");
+            dao.balanceOperation(Integer.parseInt(request.getParameter("cardNumber")), Double.parseDouble(request.getParameter("sum")), account.getAccountId());
             request.getRequestDispatcher("WEB-INF/operationSuccsessful.jsp").forward(request, response);
 
-        } catch (Exception ex) {
+        } catch (NumberFormatException ex) {
             request.getRequestDispatcher("WEB-INF/notCorrectData.jsp").forward(request, response);
         }
     }

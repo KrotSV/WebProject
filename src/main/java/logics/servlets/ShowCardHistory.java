@@ -23,7 +23,8 @@ public class ShowCardHistory extends HttpServlet {
         DAO dao = ResourceManager.getDAO();
         try{
             LinkedList<Transaction> history = dao.getHistory(Integer.parseInt(request.getParameter("cardChoose")));
-            request.setAttribute("account", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))));
+            request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
+            request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
             request.setAttribute("history", history);
             request.getRequestDispatcher("WEB-INF/cardHistory.jsp").forward(request, response);
         }

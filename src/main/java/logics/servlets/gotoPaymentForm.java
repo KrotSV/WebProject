@@ -20,7 +20,8 @@ public class gotoPaymentForm extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            request.getSession().setAttribute("account", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))));
+            request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
+            request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
             request.getRequestDispatcher("WEB-INF/payment.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){

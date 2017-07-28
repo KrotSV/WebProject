@@ -18,6 +18,7 @@
 <%--<p>${client.birthday}</p>--%>
 <form>
 <table border="1">
+    <caption><b>Client bank cards</b></caption>
     <tr>
         <td></td>
         <td><b>CardNumber</b></td>
@@ -26,14 +27,14 @@
         <td><b>Limit</b></td>
         <td><b>isBlocked</b></td>
     </tr>
-    <c:forEach items="${accounts}" var="account">
+    <c:forEach items="${cards}" var="card" varStatus="loop">
     <tr>
-        <td><input type="radio" name="cardChoose" value="${account.cardNumber}"></td>
-        <td>${account.cardNumber}</td>
-        <td>${account.balance}</td>
-        <td>${account.typeCard}</td>
-        <td>${account.limit}</td>
-        <td>${account.status}</td>
+        <td><input type="radio" name="cardChoose" value="${card.cardNumber}"></td>
+        <td>${card.cardNumber}</td>
+        <td>${accounts[loop.index].balance}</td>
+        <td>${card.typeCard}</td>
+        <td>${accounts[loop.index].limit}</td>
+        <td>${accounts[loop.index].status}</td>
     </tr>
 </c:forEach></table>
     <p><button type="submit" formaction="/payCard">Pay</button>

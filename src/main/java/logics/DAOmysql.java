@@ -14,7 +14,7 @@ public class DAOmysql extends DAO {
 
     public int testDB() {
         int out = 0;
-        try(Connection conn = this.getDataSource().getConnection()) {
+        try (Connection conn = this.getDataSource().getConnection()) {
             PreparedStatement ps = conn.prepareStatement("SELECT * FROM clients WHERE clientId=? AND firstName=?");
 //            ps.setInt(1, 1);
             ps.setInt(1, 2);
@@ -56,13 +56,12 @@ public class DAOmysql extends DAO {
 
             ResultSet result = ps.executeQuery();
             check = result.isBeforeFirst();
-            System.out.println("CHECK IS!!)@()@*!#_)" + check);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(ps != null)
-                ps.close();
+                if (ps != null)
+                    ps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -81,15 +80,14 @@ public class DAOmysql extends DAO {
             ps.setString(1, login);
             ps.setString(2, password);
             ResultSet result = ps.executeQuery();
-            System.out.println(result.getRow());
             check = result.isBeforeFirst();
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(ps != null)
-                ps.close();
+                if (ps != null)
+                    ps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -108,17 +106,17 @@ public class DAOmysql extends DAO {
             ps.setString(2, lastName);
             ResultSet result = ps.executeQuery();
             result.next();
-                client.setClientId(result.getInt("clientId"));
-                client.setFirstName(firstName);
-                client.setLastName(lastName);
-                client.setBirthday(result.getDate("birthday"));
+            client.setClientId(result.getInt("clientId"));
+            client.setFirstName(firstName);
+            client.setLastName(lastName);
+            client.setBirthday(result.getDate("birthday"));
 
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(ps != null)
-                ps.close();
+                if (ps != null)
+                    ps.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -130,7 +128,7 @@ public class DAOmysql extends DAO {
     public ArrayList<CreditCard> getClientCards(int clientId) {
         ArrayList<CreditCard> cards = new ArrayList<>();
         PreparedStatement ps = null;
-        try(Connection conn = this.getDataSource().getConnection()) {
+        try (Connection conn = this.getDataSource().getConnection()) {
             ps = conn.prepareStatement("SELECT * FROM creditcards WHERE clientId = ?");
             ps.setInt(1, clientId);
             ResultSet result = ps.executeQuery();
@@ -145,88 +143,194 @@ public class DAOmysql extends DAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return cards;
     }
 
     @Override
     public BankAccount getAccount(int cardNumber) {
-//        Connection connection = DBPool.getConnection();
-//        BankAccount account = new BankAccount();
-//        try {
-//            PreparedStatement ps = connection.prepareStatement("SELECT * FROM bankaccounts WHERE cardNumber = ?");
-//            ps.setInt(1, cardNumber);
-//            ResultSet result = ps.executeQuery();
-//            account.setAccountId(result.getInt("accountId"));
-//            account.setCardNumber(cardNumber);
-//            account.setBalance(result.getDouble("balance"));
-//            account.setLimit(result.getDouble("limitSum"));
-//            account.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
-//            account.setStatus(result.getBoolean("status"));
-//            connection.close();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return account;
-        return  null;
+        BankAccount account = new BankAccount();
+        PreparedStatement psCheckCard = null;
+        PreparedStatement psGetAccount = null;
+        try (Connection conn = this.getDataSource().getConnection()) {
+            psCheckCard = conn.prepareStatement("SELECT * FROM creditcards WHERE cardNumber=?");
+            psCheckCard.setInt(1, cardNumber);
+            ResultSet resultCard = psCheckCard.executeQuery();
+            resultCard.next();
+            int accountId = resultCard.getInt("accountId");
+
+            psGetAccount = conn.prepareStatement("SELECT * FROM bankaccounts WHERE accountId=?");
+            psGetAccount.setInt(1, accountId);
+            ResultSet result = psGetAccount.executeQuery();
+            result.next();
+            account.setAccountId(result.getInt("accountId"));
+            account.setBalance(result.getDouble("balance"));
+            account.setLimit(result.getDouble("limitSum"));
+            account.setStatus(result.getBoolean("status"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (psCheckCard != null)
+                    psCheckCard.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (psGetAccount != null)
+                        psGetAccount.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return account;
     }
 
     @Override
-    public void balanceOperation(int cardNumber, double sum) {
-//        Connection connection = DBPool.getConnection();
-//        try {
-//            PreparedStatement ps = connection.prepareStatement("UPDATE bankaccounts SET balance = ? WHERE cardNumber = ?");
-//            ps.setDouble(1, cardNumber);
-//            ps.setInt(1, cardNumber);
-//            ResultSet result = ps.executeQuery();
-//            account.setAccountId(result.getInt("accountId"));
-//            account.setCardNumber(cardNumber);
-//            account.setBalance(result.getDouble("balance"));
-//            account.setLimit(result.getDouble("limitSum"));
-//            account.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
-//            account.setStatus(result.getBoolean("status"));
-//            connection.close();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-    }
+    public void balanceOperation(int cardNumber, double sum, int receiverAccount) {
+        PreparedStatement ps = null;
+        try (Connection conn = this.getDataSource().getConnection()) {
+            ps = conn.prepareStatement("SELECT * FROM creditcards WHERE cardNumber=?");
+            ps.setInt(1, cardNumber);
+            ResultSet resultCard = ps.executeQuery();
+            resultCard.next();
 
+            int accountId = resultCard.getInt("accountId");
+
+            ps = conn.prepareStatement("UPDATE bankaccounts SET balance=balance+? WHERE accountId = ?");
+            ps.setDouble(1, sum);
+            ps.setInt(2, accountId);
+            ps.executeUpdate();
+
+            ps = conn.prepareStatement("INSERT INTO transactions (accountId, date, sum) VALUES (?, ?. ?)");
+            ps.setInt(1, accountId);
+            ps.setDate(2, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            ps.setDouble(3, sum);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     @Override
     public void changeBlockStatus(int Id, boolean status) {
+        ArrayList<CreditCard> cards = new ArrayList<>();
+        PreparedStatement ps = null;
+        try (Connection conn = this.getDataSource().getConnection()) {
+            ps = conn.prepareStatement("UPDATE bankaccounts SET status = ?");
+            ps.setBoolean(1, status);
+            ps.executeUpdate();
+        } catch (
+                SQLException e)
 
+        {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    @Override
-    public LinkedList<CardRequest> getRequests() {
-        return null;
+
+        @Override
+        public LinkedList<CardRequest> getRequests () {
+            LinkedList<CardRequest> requests = new LinkedList<>();
+            PreparedStatement ps = null;
+            try (Connection conn = this.getDataSource().getConnection()) {
+                ps = conn.prepareStatement("SELECT * FROM cardrequests");
+                ResultSet result = ps.executeQuery();
+                while (result.next()) {
+                    CardRequest request = new CardRequest();
+                    request.setClientId(result.getInt("requestId"));
+                    request.setDate(new java.util.Date(result.getTimestamp("date").getTime()));
+                    request.setClientId(result.getInt("clientId"));
+                    request.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
+                    request.setApproval(result.getBoolean("approval"));
+                    requests.add(request);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null)
+                        ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return requests;
+        }
+
+        @Override
+        public LinkedList<Transaction> getHistory ( int cardNumber){
+            LinkedList<Transaction> transactions = new LinkedList<>();
+            PreparedStatement ps = null;
+            try (Connection conn = this.getDataSource().getConnection()) {
+                ps = conn.prepareStatement("SELECT * FROM creditcards WHERE cardNumber=?");
+                ps.setInt(1, cardNumber);
+                ResultSet resultCard = ps.executeQuery();
+                resultCard.next();
+
+                int accountId = resultCard.getInt("accountId");
+
+                ps = conn.prepareStatement("SELECT * FROM transactions WHERE accountId = ?");
+                ps.setInt(1,accountId);
+                ResultSet result = ps.executeQuery();
+                while (result.next()) {
+                    Transaction transaction = new Transaction();
+                    transaction.setTransactionId(result.getInt("transactionId"));
+                    transaction.setAccountId(accountId);
+                    transaction.setDate(new java.util.Date(result.getTimestamp("date").getTime()));
+                    transaction.setSum(result.getDouble("sum"));
+                    transaction.setReceiverAccount(result.getInt("receiverAccount"));
+                    transactions.add(transaction);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null)
+                        ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return transactions;
+        }
+
+        @Override
+        public void addCardRequest ( int clientId, TypeCard typeCard){
+
+        }
+
+        @Override
+        public void approveRequest ( int requestId){
+
+        }
+
+        @Override
+        public void rejectRequest ( int requestId){
+
+        }
     }
-
-    @Override
-    public LinkedList<Transaction> getHistory(int cardNumber) {
-        return null;
-    }
-
-    @Override
-    public void addTransaction(int cardNumber, double sum) {
-
-    }
-
-    @Override
-    public void addCardRequest(int clientId, TypeCard typeCard) {
-
-    }
-
-    @Override
-    public void approveRequest(int requestId) {
-
-    }
-
-    @Override
-    public void rejectRequest(int requestId) {
-
-    }
-}

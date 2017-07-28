@@ -20,14 +20,12 @@ public class PaymentOperation extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        try{
             DAO dao = ResourceManager.getDAO();
-            BankAccount account = dao.getAccount(Integer.parseInt(request.getParameter("cardChoose")));
-            request.getSession().setAttribute("cardChoose", Integer.parseInt(request.getParameter("cardChoose")));
+            BankAccount account = dao.getAccount(Integer.parseInt(request.getParameter("cardNumber")));
             if(account.getBalance() - Double.parseDouble(request.getParameter("sum")) < account.getLimit()){
                 request.getRequestDispatcher("WEB-INF/notEnoughMoney.jsp").forward(request,response);
             }
             else {
-                dao.balanceOperation(Integer.parseInt(request.getParameter("cardChoose")), - Double.parseDouble(request.getParameter("sum")));
-                dao.addTransaction((Integer)request.getSession().getAttribute("cardChoose"), Double.parseDouble(request.getParameter("sum")));
+                dao.balanceOperation(Integer.parseInt(request.getParameter("cardNumber")), - Double.parseDouble(request.getParameter("sum")), Integer.parseInt(request.getParameter("receiver")));
                 request.getRequestDispatcher("WEB-INF/operationSuccsessful.jsp").forward(request,response);
             }
         }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: krotsv
@@ -7,21 +8,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <html>
 <head>
     <title>History</title>
 </head>
 <body>
 <h3>Account operation history</h3>
-<p>Card number: ${requestScope.account.cardNumber}; balance: ${requestScope.account.balance}</p>
+<p>Card number: ${cardNumber}; balance: ${balance}</p>
     <table border="1">
 <tr>
     <td><b>Date</b></td>
     <td><b>Sum</b></td>
 </tr>
 <c:forEach items="${requestScope.history}" var="transaction">
+    <c:set> var="date" value="${transaction.date}" scope="page"</c:set>
     <tr>
-    <td>${transaction.date.time}</td>
+    <td><fmt:formatDate dateStyle="medium" timeStyle="medium" value="${date}"/> </td>
     <td>${transaction.sum}</td>
     </tr>
 </c:forEach></table>

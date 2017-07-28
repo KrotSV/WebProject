@@ -19,6 +19,8 @@ public class gotoAddForm extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         DAO dao = ResourceManager.getDAO();
         try{
+            request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
+            request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
             request.getSession().setAttribute("account", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))));
             request.getRequestDispatcher("WEB-INF/addMoneyToCard.jsp").forward(request, response);
         }

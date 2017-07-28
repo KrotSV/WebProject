@@ -2,18 +2,19 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class CardRequest implements Serializable{
     private int requestId;
-    private Calendar date;
+    private Date date;
     private int clientId;
     private TypeCard typeCard;
     private boolean approval;
 
     public CardRequest(){};
 
-    public CardRequest(int requestId, Calendar date, int clientId, TypeCard typeCard, boolean approval) {
+    public CardRequest(int requestId, Date date, int clientId, TypeCard typeCard, boolean approval) {
         this.requestId = requestId;
         this.date = date;
         this.clientId = clientId;
@@ -21,7 +22,7 @@ public class CardRequest implements Serializable{
         this.approval = approval;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -33,7 +34,7 @@ public class CardRequest implements Serializable{
         return approval;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

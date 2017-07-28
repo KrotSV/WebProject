@@ -11,9 +11,6 @@ public class CreditCard implements Serializable{
     private int clientId;
     private TypeCard typeCard;
 
-
-    private double limit;
-
     public CreditCard(){}
 
     public CreditCard(int cardNumber, int clientId, Date validity, TypeCard typeCard, int accountId) {
@@ -32,16 +29,16 @@ public class CreditCard implements Serializable{
         return validity;
     }
 
-    public TypeCard getTypeCard() {
-        return typeCard;
+    public int getClientId() {
+        return clientId;
     }
 
     public int getAccountId() {
         return accountId;
     }
 
-    public double getLimit() {
-        return limit;
+    public TypeCard getTypeCard() {
+        return typeCard;
     }
 
     public void setCardNumber(int cardNumber) {
@@ -56,16 +53,8 @@ public class CreditCard implements Serializable{
         this.accountId = accountId;
     }
 
-    public void setLimit(double limit) {
-        this.limit = limit;
-    }
-
     public void setTypeCard(TypeCard typeCard) {
         this.typeCard = typeCard;
-    }
-
-    public int getClientId() {
-        return clientId;
     }
 
     public void setClientId(int clientId) {
