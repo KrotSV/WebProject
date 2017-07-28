@@ -268,7 +268,7 @@ public class DAOmysql extends DAO {
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 CardRequest request = new CardRequest();
-                request.setClientId(result.getInt("requestId"));
+                request.setRequestId(result.getInt("requestId"));
                 request.setDate(new java.util.Date(result.getTimestamp("date").getTime()));
                 request.setClientId(result.getInt("clientId"));
                 request.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));

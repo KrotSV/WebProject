@@ -18,7 +18,13 @@ public class ApproveRequest extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dao.approveRequest(Integer.parseInt(request.getParameter("requestChoose")));
-        request.getRequestDispatcher("WEB-INF/deadends/requestApproved.jsp").forward(request,response);
+        try{
+
+            dao.approveRequest(Integer.parseInt(request.getParameter("requestChoose")));
+            request.getRequestDispatcher("WEB-INF/deadends/requestApproved.jsp").forward(request,response);
+        }
+        catch (NumberFormatException e){
+            request.getRequestDispatcher("WEB-INF/deadends/requestNotChoosen.jsp").forward(request,response);
+        }
     }
 }
