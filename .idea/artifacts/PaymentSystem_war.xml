@@ -7,7 +7,7 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="commons-dbcp:commons-dbcp:1.4" />
           <element id="library" level="project" name="jstl:jstl:1.2" />
-          <element id="library" level="project" name="mysql:mysql-connector-java:5.1.31" />
+          <element id="library" level="project" name="mysql:mysql-connector-java:5.1.40" />
         </element>
       </element>
     </root>

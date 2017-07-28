@@ -6,7 +6,6 @@ import java.util.Date;
 
 public class CreditCard implements Serializable{
     private int cardNumber;
-    private String owner;
     private Date validity;
     private int accountId;
     private int clientId;
@@ -17,22 +16,16 @@ public class CreditCard implements Serializable{
 
     public CreditCard(){}
 
-    public CreditCard(int cardNumber, String owner, int clientId, Date validity, TypeCard typeCard, double limit, int accountId) {
+    public CreditCard(int cardNumber, int clientId, Date validity, TypeCard typeCard, int accountId) {
         this.cardNumber = cardNumber;
-        this.owner = owner;
         this.clientId = clientId;
+        this.accountId = accountId;
         this.validity = validity;
         this.typeCard = typeCard;
-        this.limit = limit;
-        this.accountId = accountId;
     }
 
     public int getCardNumber() {
         return cardNumber;
-    }
-
-    public String getOwner() {
-        return owner;
     }
 
     public Date getValidity() {
@@ -53,10 +46,6 @@ public class CreditCard implements Serializable{
 
     public void setCardNumber(int cardNumber) {
         this.cardNumber = cardNumber;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public void setValidity(Date validity) {

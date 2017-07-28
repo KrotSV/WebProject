@@ -18,7 +18,7 @@ public class DAOJava  {
 //        return null;
 //    }
 //
-//    public boolean checkClientExistence(String firstName, String lastName) {
+//    public boolean checkExistence(String firstName, String lastName) {
 //        ArrayList<Client> clients = database.getClients();
 //        Iterator<Client> iterator = clients.iterator();
 //        while (iterator.hasNext()){
@@ -50,7 +50,7 @@ public class DAOJava  {
 //        return !admins.isEmpty();
 //    }
 //
-//    public Client getClientData(String firstName, String lastName) {
+//    public Client getData(String firstName, String lastName) {
 //        Client client = null;
 //        for (Client cl:database.getClients()) {
 //            if(cl.getLastName().equals(lastName)){
@@ -61,7 +61,7 @@ public class DAOJava  {
 //        return client;
 //    }
 //
-//    public Client getClientData(int clientId) {
+//    public Client getData(int clientId) {
 //        Client client = null;
 //        for (Client cl:database.getClients()) {
 //            if(cl.getClientId() == clientId){
@@ -72,7 +72,7 @@ public class DAOJava  {
 //        return client;
 //    }
 //
-//    public ArrayList<CreditCard> getClientCards(int clientId) {
+//    public ArrayList<CreditCard> getEntitiesList(int clientId) {
 //        ArrayList<CreditCard> cards = database.getCards();
 //        Iterator<CreditCard> iterator = cards.iterator();
 //        while (iterator.hasNext()){
@@ -112,7 +112,7 @@ public class DAOJava  {
 //
 //
 //
-//    public void changeBlockStatus(int accountId, boolean status) {
+//    public void changeStatus(int accountId, boolean status) {
 //        for (BankAccount ba:database.getAccounts()) {
 //            if(ba.getAccountId() == accountId){
 //                ba.setStatus(status);

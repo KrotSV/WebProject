@@ -33,7 +33,6 @@
     <orderEntry type="library" name="commons-dbcp:commons-dbcp:1.4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-dbcp:8.5.16" level="project" />
     <orderEntry type="library" name="Maven: org.apache.tomcat:tomcat-juli:8.5.16" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.0.8-bin" level="project" />
-    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.31" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.40" level="project" />
   </component>
 </module>

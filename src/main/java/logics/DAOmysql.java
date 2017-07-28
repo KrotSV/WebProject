@@ -3,22 +3,31 @@ package logics;
 import entities.*;
 
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class DAOmysql extends DAO{
+public class DAOmysql extends DAO {
 
-
-    public String testDB(Connection connection){
-        String out = null;
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients");
+    public int testDB() {
+        int out = 0;
+        try(Connection conn = this.getDataSource().getConnection()) {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM clients WHERE clientId=? AND firstName=?");
 //            ps.setInt(1, 1);
+            ps.setInt(1, 2);
+            ps.setString(2, "Ivan");
+
             ResultSet resultSet = ps.executeQuery();
 //            out = resultSet.getString("login");
             System.out.println("print result");
-            if (!resultSet.isBeforeFirst() ) {
+            out = resultSet.getRow();
+            ResultSetMetaData meta = resultSet.getMetaData();
+            System.out.println("Strings: " + meta.getColumnCount());
+            System.out.println("2nd column: " + meta.getColumnName(2));
+            if (!resultSet.isBeforeFirst()) {
                 System.out.println("No data");
             }
             while (resultSet.next()) {
@@ -37,122 +46,135 @@ public class DAOmysql extends DAO{
 
     @Override
     public boolean checkClientExistence(String firstName, String lastName) {
-        Connection connection = DBconnect.getConnection();
+        PreparedStatement ps = null;
         boolean check = false;
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE clients.firstName= ? & clients.lastName= ?");
+        try (Connection conn = this.getDataSource().getConnection()) {
+
+            ps = conn.prepareStatement("SELECT * FROM clients WHERE firstName=? AND lastName=?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
 
             ResultSet result = ps.executeQuery();
-            check = result.next();
-            if (!result.isBeforeFirst() ) {
-                System.out.println("No data");
-            }
-            while (result.next()) {
-                System.out.println("Номер в выборке #" + result.getRow()
-                        + "\t Номер в базе #" + result.getInt("clientId")
-                        + "\t" + result.getString("firstName"));
-            }
-            connection.close();
+            check = result.isBeforeFirst();
+            System.out.println("CHECK IS!!)@()@*!#_)" + check);
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(ps != null)
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return check;
     }
 
+
     @Override
     public boolean checkAdmin(String login, String password) {
-        Connection connection = DBconnect.getConnection();
+
+        PreparedStatement ps = null;
         boolean check = false;
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM admins WHERE login = ? & admins.password = ?");
+        try (Connection conn = this.getDataSource().getConnection()) {
+            ps = conn.prepareStatement("SELECT * FROM admins WHERE login=? AND password=?");
             ps.setString(1, login);
             ps.setString(2, password);
-
             ResultSet result = ps.executeQuery();
-            check = !result.wasNull();
-            connection.close();
+            System.out.println(result.getRow());
+            check = result.isBeforeFirst();
+
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(ps != null)
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return check;
     }
 
     @Override
     public Client getClientData(String firstName, String lastName) {
-        Connection connection = DBconnect.getConnection();
+        PreparedStatement ps = null;
         Client client = new Client();
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM clients WHERE firstName = ? & clients.lastName = ?");
+        try (Connection conn = this.getDataSource().getConnection()) {
+
+            ps = conn.prepareStatement("SELECT * FROM clients WHERE firstName=? AND lastName=?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ResultSet result = ps.executeQuery();
-            client.setFirstName(result.getString("firstName"));
-            client.setLastName(result.getString("lastName"));
-            client.setBirthday(result.getDate("birthday"));
-            client.setClientId(result.getInt("clientId"));
-            connection.close();
+            result.next();
+                client.setClientId(result.getInt("clientId"));
+                client.setFirstName(firstName);
+                client.setLastName(lastName);
+                client.setBirthday(result.getDate("birthday"));
+
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if(ps != null)
+                ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return client;
-
     }
 
     @Override
     public ArrayList<CreditCard> getClientCards(int clientId) {
-        Connection connection = DBconnect.getConnection();
         ArrayList<CreditCard> cards = new ArrayList<>();
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT * FROM creditcards WHERE clientId = ?");
+        PreparedStatement ps = null;
+        try(Connection conn = this.getDataSource().getConnection()) {
+            ps = conn.prepareStatement("SELECT * FROM creditcards WHERE clientId = ?");
             ps.setInt(1, clientId);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 CreditCard card = new CreditCard();
-                card.setAccountId(result.getInt("accountId"));
                 card.setCardNumber(result.getInt("cardNumber"));
-                card.setClientId(clientId);
-                card.setLimit(result.getDouble("limitSum"));
-                card.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
-                card.setOwner(result.getString("owner"));
                 card.setValidity(result.getDate("validity"));
+                card.setAccountId(result.getInt("accountId"));
+                card.setClientId(clientId);
+                card.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
                 cards.add(card);
             }
-            connection.close();
-
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return cards;
     }
 
-        @Override
+    @Override
     public BankAccount getAccount(int cardNumber) {
-            Connection connection = DBconnect.getConnection();
-            BankAccount account = new BankAccount();
-            try {
-                PreparedStatement ps = connection.prepareStatement("SELECT * FROM bankaccounts WHERE cardNumber = ?");
-                ps.setInt(1, cardNumber);
-                ResultSet result = ps.executeQuery();
-                account.setAccountId(result.getInt("accountId"));
-                account.setCardNumber(cardNumber);
-                account.setBalance(result.getDouble("balance"));
-                account.setLimit(result.getDouble("limitSum"));
-                account.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
-                account.setStatus(result.getBoolean("status"));
-                connection.close();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return account;
+//        Connection connection = DBPool.getConnection();
+//        BankAccount account = new BankAccount();
+//        try {
+//            PreparedStatement ps = connection.prepareStatement("SELECT * FROM bankaccounts WHERE cardNumber = ?");
+//            ps.setInt(1, cardNumber);
+//            ResultSet result = ps.executeQuery();
+//            account.setAccountId(result.getInt("accountId"));
+//            account.setCardNumber(cardNumber);
+//            account.setBalance(result.getDouble("balance"));
+//            account.setLimit(result.getDouble("limitSum"));
+//            account.setTypeCard(TypeCard.valueOf(result.getString("typeCard")));
+//            account.setStatus(result.getBoolean("status"));
+//            connection.close();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return account;
+        return  null;
     }
 
     @Override
     public void balanceOperation(int cardNumber, double sum) {
-//        Connection connection = DBconnect.getConnection();
+//        Connection connection = DBPool.getConnection();
 //        try {
 //            PreparedStatement ps = connection.prepareStatement("UPDATE bankaccounts SET balance = ? WHERE cardNumber = ?");
 //            ps.setDouble(1, cardNumber);
@@ -171,8 +193,10 @@ public class DAOmysql extends DAO{
 //        }
     }
 
+
+
     @Override
-    public void changeBlockStatus(int accountId, boolean status) {
+    public void changeBlockStatus(int Id, boolean status) {
 
     }
 

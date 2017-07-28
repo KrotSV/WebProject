@@ -9,6 +9,7 @@ public class Transaction implements Serializable{
     private int accountId;
     private Date date;
     private double sum;
+    private int receiverAccount;
 
     public Transaction(){}
 
@@ -49,6 +50,14 @@ public class Transaction implements Serializable{
 
     public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public int getReceiverAccount() {
+        return receiverAccount;
+    }
+
+    public void setReceiverAccount(int receiverAccount) {
+        this.receiverAccount = receiverAccount;
     }
 }
 

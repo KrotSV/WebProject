@@ -14,10 +14,10 @@ import java.util.LinkedList;
 public class test {
 //    public static void main(String[] args) {
 //        DAO dao = new ResourceManager().getDAO();
-//        Client client = dao.getClientData("Ivan", "Ivanov");
+//        Client client = dao.getData("Ivan", "Ivanov");
 //        System.out.println(client.getFirstName() + ", " + client.getLastName());
 //        System.out.printf(ResourceManager.format(client.getBirthday()));
-//        ArrayList<CreditCard> cards = dao.getClientCards(client.getClientId());
+//        ArrayList<CreditCard> cards = dao.getEntitiesList(client.getClientId());
 //        System.out.println();
 //        System.out.println(cards.size());
 //        ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();

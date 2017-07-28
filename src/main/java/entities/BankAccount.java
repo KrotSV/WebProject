@@ -9,25 +9,18 @@ public class BankAccount implements Serializable{
     private int accountId;
     private double balance;
     private boolean status;
-    private int cardNumber;
-    private TypeCard typeCard;
     private double limit;
 
 
     public BankAccount(){}
 
-    public BankAccount(int accountId, double balance, boolean isBlocked, int cardNumber, TypeCard typeCard, double limit) {
+    public BankAccount(int accountId, double balance, boolean isBlocked, double limit) {
         this.accountId = accountId;
         this.balance = balance;
         this.status = isBlocked;
-        this.cardNumber = cardNumber;
-        this.typeCard = typeCard;
         this.limit = limit;
     }
 
-    public int getCardNumber() {
-        return cardNumber;
-    }
 
     public int getAccountId() {
         return accountId;
@@ -53,21 +46,8 @@ public class BankAccount implements Serializable{
         return status;
     }
 
-
     public void setAccountId(int accountId) {
         this.accountId = accountId;
-    }
-
-    public void setCardNumber(int cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
-    public TypeCard getTypeCard() {
-        return typeCard;
-    }
-
-    public void setTypeCard(TypeCard typeCard) {
-        this.typeCard = typeCard;
     }
 
     public double getLimit() {
