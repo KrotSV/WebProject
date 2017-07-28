@@ -1,4 +1,4 @@
-package logics.servlets;
+package logics.servlets.login;
 
 import logics.DAO;
 import logics.ResourceManager;
@@ -21,10 +21,10 @@ public class AdminLogin extends HttpServlet {
         if(dao.checkAdmin(request.getParameter("login"), request.getParameter("password"))) {
             request.getSession().setAttribute("login", request.getParameter("login"));
             request.getSession().setAttribute("password", request.getParameter("password"));
-            request.getRequestDispatcher("WEB-INF/adminActionPage.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/operations/adminActionPage.jsp").forward(request, response);
         }
         else
-            request.getRequestDispatcher("WEB-INF/noSuchAdmin.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/noSuchAdmin.jsp").forward(request, response);
 
     }
 }

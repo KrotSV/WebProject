@@ -1,4 +1,4 @@
-package logics.servlets;
+package logics.servlets.block;
 
 import logics.DAO;
 import logics.ResourceManager;
@@ -20,10 +20,10 @@ public class BlockCard extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             dao.changeBlockStatus(Integer.parseInt(request.getParameter("cardChoose")), true);
-            request.getRequestDispatcher("WEB-INF/block.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/block.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){
-            request.getRequestDispatcher("WEB-INF/cardNotChoose.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoose.jsp").forward(request, response);
         }
     }
 }

@@ -8,6 +8,11 @@ import java.util.GregorianCalendar;
 import java.util.LinkedList;
 
 public class DatabaseEmulator {
+
+    /*----------
+    Temp
+     ---------*/
+
 //    private ArrayList<Admin> admins = new ArrayList<Admin>();
 //    private ArrayList<Client> clients = new ArrayList<Client>();
 //    private ArrayList<CreditCard> cards = new ArrayList<CreditCard>();

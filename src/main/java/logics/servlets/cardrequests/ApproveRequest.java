@@ -1,4 +1,7 @@
-package logics.servlets;
+package logics.servlets.cardrequests;
+
+import logics.DAO;
+import logics.ResourceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,13 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RequestNewCard", urlPatterns = "/requestNewCard")
-public class RequestNewCard extends HttpServlet {
+@WebServlet(name = "ApproveRequest", urlPatterns = "/approveRequest")
+public class ApproveRequest extends HttpServlet {
+    DAO dao = ResourceManager.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/createRequest.jsp").forward(request, response);
+        dao.approveRequest(Integer.parseInt(request.getParameter("requestChoose")));
+        request.getRequestDispatcher("WEB-INF/deadends/requestApproved.jsp").forward(request,response);
     }
 }

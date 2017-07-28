@@ -10,6 +10,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 public class DAOJava  {
+    /*------
+    Depricated test data
+    ------- */
 
 //    private DatabaseEmulator database = new DatabaseEmulator();
 //

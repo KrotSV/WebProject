@@ -321,16 +321,61 @@ public class DAOmysql extends DAO {
 
         @Override
         public void addCardRequest ( int clientId, TypeCard typeCard){
-
+            PreparedStatement ps = null;
+            try (Connection conn = this.getDataSource().getConnection()) {
+                ps = conn.prepareStatement("INSERT INTO cardrequests (date, clientId, typeCard) VALUES (?, ?, ?)"  );
+                ps.setDate(1, Date.valueOf(java.time.LocalDate.now()));
+                ps.setInt(2, clientId);
+                ps.setString(3, String.valueOf(clientId));
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null)
+                        ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         @Override
         public void approveRequest ( int requestId){
-
+            PreparedStatement ps = null;
+            try (Connection conn = this.getDataSource().getConnection()) {
+                ps = conn.prepareStatement("UPDATE cardrequests SET approval = ?"  );
+                ps.setBoolean(1, true);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null)
+                        ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
 
         @Override
         public void rejectRequest ( int requestId){
-
+            PreparedStatement ps = null;
+            try (Connection conn = this.getDataSource().getConnection()) {
+                ps = conn.prepareStatement("UPDATE cardrequests SET approval = ?"  );
+                ps.setBoolean(1, false);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (ps != null)
+                        ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }

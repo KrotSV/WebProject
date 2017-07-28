@@ -1,4 +1,4 @@
-package logics.servlets;
+package logics.servlets.cardrequests;
 
 import entities.TypeCard;
 import logics.DAO;
@@ -20,6 +20,6 @@ public class SendRequestData extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         dao.addCardRequest((Integer)(request.getSession().getAttribute("clientId")), TypeCard.valueOf(request.getParameter("typeChose")));
-        request.getRequestDispatcher("WEB-INF/operationSuccsessful.jsp").forward(request,response);
+        request.getRequestDispatcher("WEB-INF/deadends/operationSuccsessful.jsp").forward(request,response);
     }
 }

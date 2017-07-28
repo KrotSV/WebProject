@@ -1,4 +1,4 @@
-package logics.servlets;
+package logics.servlets.transactions;
 
 import entities.BankAccount;
 import logics.DAO;

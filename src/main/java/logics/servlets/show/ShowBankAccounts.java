@@ -1,4 +1,4 @@
-package logics.servlets;
+package logics.servlets.show;
 
 import entities.BankAccount;
 import entities.Client;
@@ -37,13 +37,13 @@ public class ShowBankAccounts extends HttpServlet {
                 request.getSession().setAttribute("firstName", request.getParameter("firstName"));
                 request.getSession().setAttribute("lastName", request.getParameter("lastName"));
 
-                request.getRequestDispatcher("WEB-INF/clientAccounts.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/forms/clientAccounts.jsp").forward(request, response);
             } else {
-                request.getRequestDispatcher("WEB-INF/noSuchClient.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
             }
         }
         catch (Exception ex){
-            request.getRequestDispatcher("WEB-INF/noSuchClient.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
         }
     }
 

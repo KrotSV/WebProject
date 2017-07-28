@@ -1,4 +1,4 @@
-package logics.servlets;
+package logics.servlets.login;
 
 import entities.BankAccount;
 import entities.Client;
@@ -35,10 +35,10 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
         }
         request.getSession().setAttribute("accounts", accounts);
         request.getSession().setAttribute("client", client);
-        request.getRequestDispatcher("WEB-INF/clientDataPage.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/forms/clientDataPage.jsp").forward(request, response);
     }
     else {
-        request.getRequestDispatcher("WEB-INF/noSuchUser.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/deadends/noSuchUser.jsp").forward(request, response);
     }
    }
 }
