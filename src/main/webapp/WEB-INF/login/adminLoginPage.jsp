@@ -15,7 +15,7 @@
 <form action="/sendAdminData" method="get">
     <p>login:    <input type="text" name="login"/></p>
     <p>Password: <input type="text" name="password"/></p>
-    <input type="submit" value="Login"/>
+    <p><input type="submit" value="Login"/>   <button type="submit" formaction="/start">Exit</button></p>
 </form>
 </body>
 </html>

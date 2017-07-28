@@ -29,7 +29,6 @@ public abstract class DAO {
         return this.dataSource;
     }
 
-    public abstract int testDB();
     public abstract boolean checkClientExistence(String firstName, String lastName);
     public abstract boolean checkAdmin(String login, String password);
     public abstract Client getClientData(String firstName, String lastName);

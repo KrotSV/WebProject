@@ -17,6 +17,7 @@
 <table border="1">
     <tr>
         <td></td>
+        <td><b>RequestId</b></td>
         <td><b>Date</b></td>
         <td><b>ClientId</b></td>
         <td><b>Type card</b></td>
@@ -25,14 +26,15 @@
     <c:forEach items="${sessionScope.requests}" var="request">
     <tr>
         <td><input type="radio" name="requestChoose" value="${request.requestId}"></td>
-        <td>${request.date.time}</td>
+        <td>${request.requestId}</td>
+        <td>${request.date}</td>
         <td>${request.clientId}</td>
         <td>${request.typeCard}</td>
         <td>${request.approval}</td>
     </tr>
 </c:forEach></table>
     <p><button type="submit" formaction="/approveRequest">Approve</button>
-    <button type="submit" formaction="/rejectRequest">Reject</button>
+        <button type="submit" formaction="/rejectRequest">Reject</button>
         <input type="hidden" name="login" value="${sessionScope.login}">
         <input type="hidden" name="password" value="${sessionScope.password}">
         <button formaction="/sendAdminData">Back</button></p>

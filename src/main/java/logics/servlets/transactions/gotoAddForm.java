@@ -22,9 +22,9 @@ public class gotoAddForm extends HttpServlet {
             request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
             request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
             request.getSession().setAttribute("account", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))));
-            request.getRequestDispatcher("WEB-INF/addMoneyToCard.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/forms/addMoneyToCard.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){}
-        request.getRequestDispatcher("WEB-INF/cardNotChoose.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/deadends/cardNotChoosen.jsp").forward(request, response);
     }
 }

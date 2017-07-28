@@ -22,9 +22,9 @@
     <td><b>Sum</b></td>
 </tr>
 <c:forEach items="${requestScope.history}" var="transaction">
-    <c:set> var="date" value="${transaction.date}" scope="page"</c:set>
+    <%--<c:set> var="date" value="${transaction.date}" scope="page"</c:set>--%>
     <tr>
-    <td><fmt:formatDate dateStyle="medium" timeStyle="medium" value="${date}"/> </td>
+    <td>${transaction.date}</td>
     <td>${transaction.sum}</td>
     </tr>
 </c:forEach></table>

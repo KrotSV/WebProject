@@ -18,7 +18,7 @@ public class ChangeCardStatus extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dao.changeBlockStatus(Integer.parseInt(request.getParameter("cardChoose")), true);
+        dao.changeBlockStatus(Integer.parseInt(request.getParameter("cardChoose")), false);
         request.getRequestDispatcher("WEB-INF/deadends/statusChanged.jsp").forward(request,response);
     }
 }

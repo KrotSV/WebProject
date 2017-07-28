@@ -23,7 +23,7 @@ public class BlockCard extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/deadends/block.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){
-            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoose.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoosen.jsp").forward(request, response);
         }
     }
 }

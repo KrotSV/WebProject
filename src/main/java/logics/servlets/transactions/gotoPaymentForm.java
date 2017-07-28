@@ -22,10 +22,10 @@ public class gotoPaymentForm extends HttpServlet {
         try {
             request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
             request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());
-            request.getRequestDispatcher("WEB-INF/payment.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/forms/payment.jsp").forward(request, response);
         }
         catch (NumberFormatException ex){
-            request.getRequestDispatcher("WEB-INF/cardNotChoose.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/deadends/cardNotChoosen.jsp").forward(request, response);
         }
     }
 }

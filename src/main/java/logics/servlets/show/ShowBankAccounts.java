@@ -22,12 +22,14 @@ public class ShowBankAccounts extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+//        try {
             if (dao.checkClientExistence(request.getParameter("firstName"), request.getParameter("lastName"))) {
                 Client client = dao.getClientData(request.getParameter("firstName"), request.getParameter("lastName"));
 
                 ArrayList<CreditCard> cards = dao.getClientCards(client.getClientId());
                 ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
+                request.getSession().setAttribute("cards", cards);
+
 
                 for (CreditCard c : cards) {
                     accounts.add(dao.getAccount(c.getCardNumber()));
@@ -41,10 +43,10 @@ public class ShowBankAccounts extends HttpServlet {
             } else {
                 request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
             }
-        }
-        catch (Exception ex){
-            request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
-        }
+//        }
+//        catch (Exception ex){
+//            request.getRequestDispatcher("WEB-INF/deadends/noSuchClient.jsp").forward(request, response);
+//        }
     }
 
 }

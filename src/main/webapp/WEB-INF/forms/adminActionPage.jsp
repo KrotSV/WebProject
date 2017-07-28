@@ -17,6 +17,7 @@
     <p>Enter last  name: <input type="text" name="lastName"/></p>
     <input type="submit" value="Show accounts"/>
     <p>Check card issue requests: <button formaction="/checkRequests">Check</button></p>
+    <p><button type="submit" formaction="/start">Exit</button></p>
 </form>
 </body>
 </html>
