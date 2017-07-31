@@ -12,22 +12,7 @@ import java.util.LinkedList;
 
 public abstract class DAO {
 
-    private DataSource dataSource;
 
-    protected DAO(){
-        Context initContext = null;
-        try {
-            initContext = new InitialContext();
-            Context envContext  = (Context)initContext.lookup("java:/comp/env");
-            this.dataSource = (DataSource)envContext.lookup("jdbc/PaymentSystem");
-        } catch (NamingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    DataSource getDataSource(){
-        return this.dataSource;
-    }
 
     public abstract boolean checkClientExistence(String firstName, String lastName);
     public abstract boolean checkAdmin(String login, String password);

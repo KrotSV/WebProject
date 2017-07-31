@@ -8,7 +8,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <html>
 <head>
     <title>History</title>
@@ -21,12 +20,14 @@
     <td><b>Date</b></td>
     <td><b>Sum</b></td>
 </tr>
-<c:forEach items="${requestScope.history}" var="transaction">
+<c:forEach items="${sessionScope.history}" var="transaction">
     <%--<c:set> var="date" value="${transaction.date}" scope="page"</c:set>--%>
     <tr>
     <td>${transaction.date}</td>
+    <%--<td><fmt:formatDate value="${date}" dateStyle="MEDIUM"/></td>--%>
     <td>${transaction.sum}</td>
     </tr>
+
 </c:forEach></table>
 <form>
     <p>

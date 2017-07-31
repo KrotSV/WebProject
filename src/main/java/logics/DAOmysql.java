@@ -3,6 +3,7 @@ package logics;
 import entities.*;
 
 
+import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -11,6 +12,22 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DAOmysql extends DAO {
+    private DataSource dataSource;
+
+    DAOmysql(){
+        Context initContext;
+        try {
+            initContext = new InitialContext();
+            Context envContext  = (Context)initContext.lookup("java:/comp/env");
+            this.dataSource = (DataSource)envContext.lookup("jdbc/PaymentSystem");
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private DataSource getDataSource(){
+        return this.dataSource;
+    }
 
 //    public int testDB() {
 //        int out = 0;
