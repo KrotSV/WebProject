@@ -1,8 +1,8 @@
-package logics.servlets.cardrequests;
+package logic.servlets.cardrequests;
 
-import entities.TypeCard;
-import logics.DAO;
-import logics.ResourceManager;
+import entities.CardRequest;
+import logic.DAO;
+import logic.ResourceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,16 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedList;
 
-@WebServlet(name = "SendRequestData", urlPatterns = "/sendRequestData")
-public class SendRequestData extends HttpServlet {
+@WebServlet(name = "ShowRequests", urlPatterns = "/checkRequests")
+public class ShowRequests extends HttpServlet {
     DAO dao = ResourceManager.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dao.addCardRequest((Integer)(request.getSession().getAttribute("clientId")), TypeCard.valueOf(request.getParameter("typeChose")));
-        request.getRequestDispatcher("WEB-INF/deadends/operationSuccsessful.jsp").forward(request,response);
+        LinkedList<CardRequest> requests = dao.getRequests();
+        request.getSession().setAttribute("requests", requests);
+        request.getRequestDispatcher("WEB-INF/infopages/showRequests.jsp").forward(request,response);
     }
 }

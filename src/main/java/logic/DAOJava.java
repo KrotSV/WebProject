@@ -1,13 +1,4 @@
-package logics;
-
-import entities.*;
-import resources.test.DatabaseEmulator;
-
-import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.LinkedList;
+package logic;
 
 public class DAOJava  {
     /*------

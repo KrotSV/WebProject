@@ -1,10 +1,12 @@
-package logics.servlets.login;
+package logic.servlets.login;
 
 import entities.BankAccount;
 import entities.Client;
 import entities.CreditCard;
-import logics.DAO;
-import logics.ResourceManager;
+import logic.DAO;
+import logic.ResourceManager;
+import org.apache.log4j.Logger;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 @javax.servlet.annotation.WebServlet(name = "ClientLogin", urlPatterns = "/sendClientData")
 public class ClientLogin extends javax.servlet.http.HttpServlet {
     private DAO dao = ResourceManager.getDAO();
+    private static Logger logger = Logger.getLogger(ClientLogin.class);
 
     protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
 
@@ -35,9 +38,13 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
         }
         request.getSession().setAttribute("accounts", accounts);
         request.getSession().setAttribute("client", client);
+        System.out.println("Check");
+        logger.info("Client connected: " + client.getFirstName() + " " + client.getLastName());
         request.getRequestDispatcher("WEB-INF/forms/clientDataPage.jsp").forward(request, response);
+
     }
     else {
+        logger.error("Client not found" + "sasadas");
         request.getRequestDispatcher("WEB-INF/deadends/noSuchUser.jsp").forward(request, response);
     }
    }

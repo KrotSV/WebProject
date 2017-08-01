@@ -1,10 +1,10 @@
-package logics.servlets.show;
+package logic.servlets.show;
 
 import entities.BankAccount;
 import entities.Client;
 import entities.CreditCard;
-import logics.DAO;
-import logics.ResourceManager;
+import logic.DAO;
+import logic.ResourceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

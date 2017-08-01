@@ -14,7 +14,7 @@
 <h3>Sorry, but this user does not exist.</h3>
 <h3>Verify that you put correct data</h3>
 <form>
-    <button formaction="/">Back</button>
+    <button formaction="/start">Back</button>
 </form>
 </body>
 </html>

@@ -1,9 +1,8 @@
-package logics.servlets.show;
+package logic.servlets.show;
 
-import entities.Client;
 import entities.Transaction;
-import logics.DAO;
-import logics.ResourceManager;
+import logic.DAO;
+import logic.ResourceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
 import java.util.LinkedList;
 
 @WebServlet(name = "ShowCardHistory", urlPatterns = "/showHistory")

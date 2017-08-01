@@ -1,16 +1,3 @@
-import entities.BankAccount;
-import entities.Client;
-import entities.CreditCard;
-import entities.Transaction;
-import logics.DAO;
-import logics.ResourceManager;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 public class test {
 //    public static void main(String[] args) {
 //        DAO dao = new ResourceManager().getDAO();

@@ -1,12 +1,7 @@
-package logics;
+package logic;
 
 import entities.*;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedList;
 

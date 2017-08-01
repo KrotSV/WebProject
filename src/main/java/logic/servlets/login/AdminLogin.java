@@ -1,7 +1,7 @@
-package logics.servlets.login;
+package logic.servlets.login;
 
-import logics.DAO;
-import logics.ResourceManager;
+import logic.DAO;
+import logic.ResourceManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
