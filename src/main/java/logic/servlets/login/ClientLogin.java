@@ -25,7 +25,7 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
         Client client = dao.getClientData(request.getParameter("firstName"), request.getParameter("lastName"));
 
         ArrayList<CreditCard> cards = dao.getClientCards(client.getClientId());
-        ArrayList<BankAccount> accounts = new ArrayList<BankAccount>();
+        ArrayList<BankAccount> accounts = new ArrayList<>();
 
         request.getSession().setAttribute("birthday", client.getBirthday());
         request.getSession().setAttribute("firstName", client.getFirstName());
@@ -44,7 +44,7 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
 
     }
     else {
-        logger.error("Client not found" + "sasadas");
+        logger.info("Client not found" + "sasadas");
         request.getRequestDispatcher("WEB-INF/deadends/noSuchUser.jsp").forward(request, response);
     }
    }
