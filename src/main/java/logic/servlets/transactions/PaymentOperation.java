@@ -25,7 +25,7 @@ public class PaymentOperation extends HttpServlet {
             DAO dao = DAODispatcher.getDAO();
             BankAccount account = dao.getAccount(Integer.parseInt(request.getParameter("cardNumber")));
             if(account.getStatus())
-                request.getRequestDispatcher("WEB-INF/deadends.cardIsBlocked.jsp").forward(request,response);
+                request.getRequestDispatcher("WEB-INF/deadends/cardIsBlocked.jsp").forward(request,response);
             else {
                 logger.info("Operation failed: not enough money. Card № " + request.getParameter("cardNumber"));
                 if (account.getBalance() - Double.parseDouble(request.getParameter("sum")) < account.getLimit()) {

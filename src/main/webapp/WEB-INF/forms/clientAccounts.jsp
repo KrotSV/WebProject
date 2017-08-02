@@ -30,7 +30,7 @@
         <td>${account.status}</td>
     </tr>
 </c:forEach></table>
-    <p><button type="submit" formaction="/changeCardStatus">Block</button>
+    <p><button type="submit" formaction="/changeCardStatus">Unblock</button>
         <input type="hidden" name="login" value="${login}">
         <input type="hidden" name="password" value="${password}">
         <button formaction="/sendAdminData">Back</button></p>
