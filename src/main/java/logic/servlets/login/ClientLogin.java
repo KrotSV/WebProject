@@ -27,14 +27,11 @@ public class ClientLogin extends javax.servlet.http.HttpServlet {
         ArrayList<CreditCard> cards = dao.getClientCards(client.getClientId());
         ArrayList<BankAccount> accounts = new ArrayList<>();
         if(!client.getLastName().equals(request.getSession().getAttribute("lastName"))) {
-            System.out.println(request.getSession().getAttribute("lastName"));
             logger.info("Client connected: " + client.getFirstName() + " " + client.getLastName());
         }
         //Загружаем параметры клиента в сессию
-        request.getSession().setAttribute("birthday", client.getBirthday());
         request.getSession().setAttribute("firstName", client.getFirstName());
         request.getSession().setAttribute("lastName", client.getLastName());
-        request.getSession().setAttribute("clientId", client.getClientId());
         request.getSession().setAttribute("cards", dao.getClientCards(client.getClientId()));
 
         for (CreditCard c:cards) {
