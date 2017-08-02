@@ -1,7 +1,7 @@
 package logic.servlets.transactions;
 
-import logic.DAO;
-import logic.DAODispatcher;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

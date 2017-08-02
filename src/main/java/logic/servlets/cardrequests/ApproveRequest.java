@@ -1,8 +1,7 @@
 package logic.servlets.cardrequests;
 
-import logic.DAO;
-import logic.DAODispatcher;
-import logic.servlets.login.ClientLogin;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;

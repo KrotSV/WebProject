@@ -1,4 +1,4 @@
-package logic;
+package logic.DAO;
 
 import entities.*;
 

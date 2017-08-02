@@ -1,4 +1,4 @@
-package logic;
+package logic.DAO;
 
 public class DAODispatcher {
     public static DAO getDAO(){

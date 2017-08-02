@@ -3,8 +3,8 @@ package logic.servlets.login;
 import entities.BankAccount;
 import entities.Client;
 import entities.CreditCard;
-import logic.DAO;
-import logic.DAODispatcher;
+import logic.DAO.DAO;
+import logic.DAO.DAODispatcher;
 import org.apache.log4j.Logger;
 
 

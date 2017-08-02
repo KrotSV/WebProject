@@ -1,7 +1,6 @@
-package logic;
+package logic.DAO;
 
 import entities.*;
-import logic.servlets.transactions.PaymentOperation;
 import org.apache.log4j.Logger;
 
 
@@ -17,7 +16,7 @@ public class DAOmysql extends DAO {
     private DataSource dataSource;
     private static Logger logger = Logger.getLogger(DAOmysql.class);
 
-    DAOmysql(){
+    public DAOmysql(){
         Context initContext;
         try {
             initContext = new InitialContext();
