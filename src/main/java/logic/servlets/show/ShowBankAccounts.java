@@ -4,7 +4,7 @@ import entities.BankAccount;
 import entities.Client;
 import entities.CreditCard;
 import logic.DAO;
-import logic.ResourceManager;
+import logic.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "ShowBankAccounts", urlPatterns = "/sendClientDataByAdmin")
 public class ShowBankAccounts extends HttpServlet {
-    private DAO dao = ResourceManager.getDAO();
+    private DAO dao = DAODispatcher.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

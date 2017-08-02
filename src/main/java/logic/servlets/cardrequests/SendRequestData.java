@@ -2,7 +2,7 @@ package logic.servlets.cardrequests;
 
 import entities.TypeCard;
 import logic.DAO;
-import logic.ResourceManager;
+import logic.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(name = "SendRequestData", urlPatterns = "/sendRequestData")
 public class SendRequestData extends HttpServlet {
-    DAO dao = ResourceManager.getDAO();
+    DAO dao = DAODispatcher.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

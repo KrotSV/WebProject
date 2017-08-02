@@ -1,7 +1,7 @@
 package logic.servlets.transactions;
 
 import logic.DAO;
-import logic.ResourceManager;
+import logic.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +17,7 @@ public class gotoAddForm extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DAO dao = ResourceManager.getDAO();
+        DAO dao = DAODispatcher.getDAO();
         try{
             request.getSession().setAttribute("cardNumber", Integer.parseInt(request.getParameter("cardChoose")));
             request.getSession().setAttribute("balance", dao.getAccount(Integer.parseInt(request.getParameter("cardChoose"))).getBalance());

@@ -1,9 +1,9 @@
 public class test {
 //    public static void main(String[] args) {
-//        DAO dao = new ResourceManager().getDAO();
+//        DAO dao = new DAODispatcher().getDAO();
 //        Client client = dao.getData("Ivan", "Ivanov");
 //        System.out.println(client.getFirstName() + ", " + client.getLastName());
-//        System.out.printf(ResourceManager.format(client.getBirthday()));
+//        System.out.printf(DAODispatcher.format(client.getBirthday()));
 //        ArrayList<CreditCard> cards = dao.getEntitiesList(client.getClientId());
 //        System.out.println();
 //        System.out.println(cards.size());

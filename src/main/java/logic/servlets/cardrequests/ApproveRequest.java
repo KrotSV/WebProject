@@ -1,7 +1,9 @@
 package logic.servlets.cardrequests;
 
 import logic.DAO;
-import logic.ResourceManager;
+import logic.DAODispatcher;
+import logic.servlets.login.ClientLogin;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,8 @@ import java.io.IOException;
 
 @WebServlet(name = "ApproveRequest", urlPatterns = "/approveRequest")
 public class ApproveRequest extends HttpServlet {
-    DAO dao = ResourceManager.getDAO();
+    private static Logger logger = Logger.getLogger(ApproveRequest.class);
+    DAO dao = DAODispatcher.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
@@ -21,6 +24,7 @@ public class ApproveRequest extends HttpServlet {
         try{
 
             dao.approveRequest(Integer.parseInt(request.getParameter("requestChoose")));
+            logger.info("Request № " + request.getParameter("requestChoose") + " is approved");
             request.getRequestDispatcher("WEB-INF/deadends/requestApproved.jsp").forward(request,response);
         }
         catch (NumberFormatException e){

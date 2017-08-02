@@ -2,7 +2,7 @@ package logic.servlets.show;
 
 import entities.Transaction;
 import logic.DAO;
-import logic.ResourceManager;
+import logic.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,7 @@ public class ShowCardHistory extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DAO dao = ResourceManager.getDAO();
+        DAO dao = DAODispatcher.getDAO();
         try{
             LinkedList<Transaction> history = dao.getHistory(Integer.parseInt(request.getParameter("cardChoose")));
 //            LinkedList<Date> dates = new LinkedList<>();

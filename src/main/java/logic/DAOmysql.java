@@ -1,6 +1,8 @@
 package logic;
 
 import entities.*;
+import logic.servlets.transactions.PaymentOperation;
+import org.apache.log4j.Logger;
 
 
 import javax.naming.Context;
@@ -13,6 +15,7 @@ import java.util.LinkedList;
 
 public class DAOmysql extends DAO {
     private DataSource dataSource;
+    private static Logger logger = Logger.getLogger(DAOmysql.class);
 
     DAOmysql(){
         Context initContext;
@@ -60,25 +63,17 @@ public class DAOmysql extends DAO {
 
     @Override
     public boolean checkClientExistence(String firstName, String lastName) {
-        PreparedStatement ps = null;
         boolean check = false;
-        try (Connection conn = this.getDataSource().getConnection()) {
+        try (Connection conn = this.getDataSource().getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM clients WHERE firstName=? AND lastName=?")) {
 
-            ps = conn.prepareStatement("SELECT * FROM clients WHERE firstName=? AND lastName=?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
 
             ResultSet result = ps.executeQuery();
             check = result.isBeforeFirst();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
         return check;
     }
@@ -87,35 +82,26 @@ public class DAOmysql extends DAO {
     @Override
     public boolean checkAdmin(String login, String password) {
 
-        PreparedStatement ps = null;
         boolean check = false;
-        try (Connection conn = this.getDataSource().getConnection()) {
-            ps = conn.prepareStatement("SELECT * FROM admins WHERE login=? AND password=?");
+        try (Connection conn = this.getDataSource().getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT * FROM admins WHERE login=? AND password=?")) {
             ps.setString(1, login);
             ps.setString(2, password);
             ResultSet result = ps.executeQuery();
             check = result.isBeforeFirst();
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
         return check;
     }
 
     @Override
     public Client getClientData(String firstName, String lastName) {
-        PreparedStatement ps = null;
         Client client = new Client();
-        try (Connection conn = this.getDataSource().getConnection()) {
+        try (Connection conn = this.getDataSource().getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM clients WHERE firstName=? AND lastName=?")) {
 
-            ps = conn.prepareStatement("SELECT * FROM clients WHERE firstName=? AND lastName=?");
             ps.setString(1, firstName);
             ps.setString(2, lastName);
             ResultSet result = ps.executeQuery();
@@ -126,14 +112,7 @@ public class DAOmysql extends DAO {
             client.setBirthday(result.getDate("birthday"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
         return client;
     }
@@ -141,9 +120,8 @@ public class DAOmysql extends DAO {
     @Override
     public ArrayList<CreditCard> getClientCards(int clientId) {
         ArrayList<CreditCard> cards = new ArrayList<>();
-        PreparedStatement ps = null;
-        try (Connection conn = this.getDataSource().getConnection()) {
-            ps = conn.prepareStatement("SELECT * FROM creditcards WHERE clientId = ?");
+        try (Connection conn = this.getDataSource().getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM creditcards WHERE clientId = ?")) {
             ps.setInt(1, clientId);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -156,14 +134,7 @@ public class DAOmysql extends DAO {
                 cards.add(card);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
         return cards;
     }
@@ -171,18 +142,17 @@ public class DAOmysql extends DAO {
     @Override
     public BankAccount getAccount(int cardNumber) {
         BankAccount account = new BankAccount();
-        PreparedStatement psCheckCard = null;
-        PreparedStatement psGetAccount = null;
+        PreparedStatement ps = null;
         try (Connection conn = this.getDataSource().getConnection()) {
-            psCheckCard = conn.prepareStatement("SELECT * FROM creditcards WHERE cardNumber=?");
-            psCheckCard.setInt(1, cardNumber);
-            ResultSet resultCard = psCheckCard.executeQuery();
+            ps = conn.prepareStatement("SELECT * FROM creditcards WHERE cardNumber=?");
+            ps.setInt(1, cardNumber);
+            ResultSet resultCard = ps.executeQuery();
             resultCard.next();
             int accountId = resultCard.getInt("accountId");
 
-            psGetAccount = conn.prepareStatement("SELECT * FROM bankaccounts WHERE accountId=?");
-            psGetAccount.setInt(1, accountId);
-            ResultSet result = psGetAccount.executeQuery();
+            ps = conn.prepareStatement("SELECT * FROM bankaccounts WHERE accountId=?");
+            ps.setInt(1, accountId);
+            ResultSet result = ps.executeQuery();
             result.next();
             account.setAccountId(result.getInt("accountId"));
             account.setBalance(result.getDouble("balance"));
@@ -190,20 +160,13 @@ public class DAOmysql extends DAO {
             account.setStatus(result.getBoolean("status"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("SQL error " + e);
         } finally {
             try {
-                if (psCheckCard != null)
-                    psCheckCard.close();
+                if (ps != null)
+                    ps.close();
             } catch (SQLException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    if (psGetAccount != null)
-                        psGetAccount.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                logger.error("SQL error " + e);
             }
         }
         return account;
@@ -232,13 +195,13 @@ public class DAOmysql extends DAO {
             ps.setInt(4, receiverAccount);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("SQL error " + e);
         } finally {
             try {
                 if (ps != null)
                     ps.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("SQL error " + e);
             }
         }
     }
@@ -264,13 +227,13 @@ public class DAOmysql extends DAO {
                 SQLException e)
 
         {
-            e.printStackTrace();
+            logger.error("SQL error " + e);
         } finally {
             try {
                 if (ps != null)
                     ps.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("SQL error " + e);
             }
         }
     }
@@ -279,9 +242,8 @@ public class DAOmysql extends DAO {
     @Override
     public LinkedList<CardRequest> getRequests() {
         LinkedList<CardRequest> requests = new LinkedList<>();
-        PreparedStatement ps = null;
-        try (Connection conn = this.getDataSource().getConnection()) {
-            ps = conn.prepareStatement("SELECT * FROM cardrequests");
+        try (Connection conn = this.getDataSource().getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT * FROM cardrequests")) {
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 CardRequest request = new CardRequest();
@@ -293,14 +255,7 @@ public class DAOmysql extends DAO {
                 requests.add(request);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
         return requests;
     }
@@ -330,13 +285,13 @@ public class DAOmysql extends DAO {
                 transactions.add(transaction);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("SQL error " + e);
         } finally {
             try {
                 if (ps != null)
                     ps.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("SQL error " + e);
             }
         }
         return transactions;
@@ -344,63 +299,39 @@ public class DAOmysql extends DAO {
 
     @Override
     public void addCardRequest(int clientId, TypeCard typeCard) {
-        PreparedStatement ps = null;
-        try (Connection conn = this.getDataSource().getConnection()) {
-            ps = conn.prepareStatement("INSERT INTO cardrequests (date, clientId, typeCard) VALUES (?, ?, ?)");
+        try (Connection conn = this.getDataSource().getConnection();
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO cardrequests (date, clientId, typeCard) VALUES (?, ?, ?)")) {
             ps.setDate(1, Date.valueOf(java.time.LocalDate.now()));
             ps.setInt(2, clientId);
             ps.setString(3, String.valueOf(typeCard));
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
     }
 
     @Override
     public void approveRequest(int requestId) {
-        PreparedStatement ps = null;
-        try (Connection conn = this.getDataSource().getConnection()) {
-            ps = conn.prepareStatement("UPDATE cardrequests SET approval = ? WHERE requestId = ?");
+        try (Connection conn = this.getDataSource().getConnection();
+        PreparedStatement ps = conn.prepareStatement("UPDATE cardrequests SET approval = ? WHERE requestId = ?")) {
             ps.setBoolean(1, true);
             ps.setInt(2, requestId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
     }
 
 
     @Override
     public void rejectRequest(int requestId) {
-        PreparedStatement ps = null;
-        try (Connection conn = this.getDataSource().getConnection()) {
-            ps = conn.prepareStatement("UPDATE cardrequests SET approval=? WHERE requestId=?");
+        try (Connection conn = this.getDataSource().getConnection();
+        PreparedStatement ps = conn.prepareStatement("UPDATE cardrequests SET approval=? WHERE requestId=?")) {
             ps.setInt(1, 0);
             ps.setInt(2, requestId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            logger.error("SQL error " + e);
         }
     }
 

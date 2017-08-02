@@ -1,7 +1,7 @@
 package logic.servlets.transactions;
 
 import logic.DAO;
-import logic.ResourceManager;
+import logic.DAODispatcher;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "gotoPaymentForm", urlPatterns = "/payCard")
 public class gotoPaymentForm extends HttpServlet {
 
-    private DAO dao = ResourceManager.getDAO();
+    private DAO dao = DAODispatcher.getDAO();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

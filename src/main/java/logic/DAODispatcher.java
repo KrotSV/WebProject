@@ -1,6 +1,6 @@
 package logic;
 
-public class ResourceManager {
+public class DAODispatcher {
     public static DAO getDAO(){
         return new DAOmysql();
         }
